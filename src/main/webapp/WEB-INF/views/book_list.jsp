@@ -10,6 +10,6 @@
 <body>
 
 <img src ="<spring:url value='/resources/img/book_123124123.jpg'/>">
-
+<!-- 뭔가 문제가 -->
 </body>
 </html> 
