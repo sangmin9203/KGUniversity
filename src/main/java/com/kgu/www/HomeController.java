@@ -1,5 +1,7 @@
 package com.kgu.www;
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.util.Date;
@@ -7,6 +9,7 @@ import java.util.HashMap;
 import java.util.Locale;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,8 +28,9 @@ import com.kgu.www.vo.BookVO;
  */
 @Controller
 public class HomeController {
-	@Resource(name = "KguService")
+	@Resource(name = "KguService") //resorece 추가
 	private KguService kguService;
+	HttpServletRequest request;
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
@@ -56,7 +60,11 @@ public class HomeController {
 	
 	@RequestMapping("bookInsertForm.do")
 	public String bookInsertForm(@RequestParam("book_file") MultipartFile book_file, @RequestParam HashMap<String,String> hashMap)
-			throws ClassNotFoundException, SQLException	{
+			throws ClassNotFoundException, SQLException, IllegalStateException, IOException	{
+		
+		String savepoint ="C:\\Users\\pc\\Desktop\\KG_University\\src\\main\\webapp\\WEB-INF\\img";
+		File save = new File(savepoint,book_file.getOriginalFilename());
+		book_file.transferTo(save);
 		String book_picture = book_file.getOriginalFilename();
 		String book_name = (String) hashMap.get("book_name");
 		String book_writer = (String) hashMap.get("book_writer");
@@ -64,13 +72,6 @@ public class HomeController {
 		String book_info = (String) hashMap.get("book_info");
 		String book_mokcha = (String) hashMap.get("book_mokcha");
 		int book_inventory = (int) Integer.parseInt(hashMap.get("book_inventory"));
-		System.out.println(book_picture);
-		System.out.println(book_name);
-		System.out.println(book_writer);
-		System.out.println(book_price);
-		System.out.println(book_info);
-		System.out.println(book_mokcha);
-		System.out.println(book_inventory);
 		BookVO bvo = new BookVO(book_picture, book_name, book_writer, book_price, book_info, book_mokcha, book_inventory);
 		kguService.bookInsertForm(bvo);
 		return "book_insert";
