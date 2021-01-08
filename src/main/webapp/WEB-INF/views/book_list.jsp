@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib  prefix="spring" uri="http://www.springframework.org/tags" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,11 +9,7 @@
 </head>
 <body>
 
-	<h2>mainScreen.jsp</h2>
-	
-	<script>
-		location.href="book_list.do"
-	</script>
+<img src ="<spring:url value='/resources/img/book_123124123.jpg'/>">
 
 </body>
-</html>
+</html> 

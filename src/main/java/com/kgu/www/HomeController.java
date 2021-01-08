@@ -54,7 +54,7 @@ public class HomeController {
 	}
 	
 	@RequestMapping("book_insert.do")
-	public String bookIsert() {
+	public String bookInsert() {
 		return "book_insert";
 	}
 	
@@ -62,7 +62,7 @@ public class HomeController {
 	public String bookInsertForm(@RequestParam("book_file") MultipartFile book_file, @RequestParam HashMap<String,String> hashMap)
 			throws ClassNotFoundException, SQLException, IllegalStateException, IOException	{
 		
-		String savepoint ="C:\\Users\\pc\\Desktop\\KG_University\\src\\main\\webapp\\WEB-INF\\img";
+		String savepoint ="C:\\Users\\pc\\Desktop\\KG_University\\src\\main\\webapp\\resources\\img";
 		File save = new File(savepoint,book_file.getOriginalFilename());
 		book_file.transferTo(save);
 		String book_picture = book_file.getOriginalFilename();
@@ -75,6 +75,11 @@ public class HomeController {
 		BookVO bvo = new BookVO(book_picture, book_name, book_writer, book_price, book_info, book_mokcha, book_inventory);
 		kguService.bookInsertForm(bvo);
 		return "book_insert";
+	}
+	
+	@RequestMapping("book_list.do")
+	public String bookList() {
+		return "book_list";
 	}
 	
 }
