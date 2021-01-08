@@ -76,4 +76,5 @@ public class HomeController {
 		return "book_insert";
 	}
 	
+	
 }
