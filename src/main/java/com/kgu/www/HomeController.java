@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
@@ -77,8 +78,13 @@ public class HomeController {
 		return "book_insert";
 	}
 	
-	@RequestMapping("book_list.do")
-	public String bookList() {
+	@RequestMapping("BookAll.do")
+	public String BookAll(Model model)
+		throws Exception {
+		ArrayList<BookVO> alist = kguService.BookAll();
+		
+		model.addAttribute("alist", alist);
+		
 		return "book_list";
 	}
 	

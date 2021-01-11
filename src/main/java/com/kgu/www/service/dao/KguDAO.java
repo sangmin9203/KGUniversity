@@ -9,4 +9,6 @@ public interface KguDAO {
 	ArrayList<TestVO> testAll();
 	
 	void bookInsertForm(BookVO bvo);
+	
+	ArrayList<BookVO> BookAll();
 }

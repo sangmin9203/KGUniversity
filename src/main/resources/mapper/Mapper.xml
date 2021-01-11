@@ -13,4 +13,9 @@
      	VALUES (#{book_picture}, #{book_name}, #{book_writer}, #{book_price},
      	#{book_info}, #{book_mokcha}, #{book_inventory})
 	</insert>
+	
+	<select id = "BookAll" resultType = "BookVO">
+		SELECT book_picture, book_name, book_writer, book_price, book_info, book_mokcha, book_inventory 
+		FROM book
+	</select>
 </mapper>

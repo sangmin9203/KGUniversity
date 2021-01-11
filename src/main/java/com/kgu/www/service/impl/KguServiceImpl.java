@@ -26,4 +26,8 @@ public class KguServiceImpl implements KguService {
 	public void bookInsertForm(BookVO bvo) {
 		kguDAO.bookInsertForm(bvo);
 	}
+	
+	public ArrayList<BookVO> BookAll(){
+		return kguDAO.BookAll();
+	}
 }
