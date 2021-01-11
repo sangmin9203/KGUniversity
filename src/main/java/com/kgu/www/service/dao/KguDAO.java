@@ -11,4 +11,6 @@ public interface KguDAO {
 	void bookInsertForm(BookVO bvo);
 	
 	ArrayList<BookVO> BookAll();
+	
+	BookVO getBookInfo(BookVO bvo);
 }

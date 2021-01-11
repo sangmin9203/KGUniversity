@@ -3,11 +3,6 @@
 
 <mapper namespace="com.kgu.www.service.dao.KguDAO">
 
-	<select id="testAll" resultType="testVO">
-		SELECT flag, id, pw, nickname, tel
-		FROM test
-	</select>
-	
 	<insert id="bookInsertForm">
 		INSERT INTO  book 
      	VALUES (#{book_picture}, #{book_name}, #{book_writer}, #{book_price},
@@ -17,5 +12,11 @@
 	<select id = "BookAll" resultType = "BookVO">
 		SELECT book_picture, book_name, book_writer, book_price, book_info, book_mokcha, book_inventory 
 		FROM book
+	</select>
+	
+	<select id="getBookInfo" resultType = "BookVO">
+		SELECT book_picture, book_name, book_writer, book_price, book_info, book_mokcha, book_inventory 
+		FROM book
+		WHERE book_name = #{book_name}
 	</select>
 </mapper>

@@ -30,4 +30,8 @@ public class KguServiceImpl implements KguService {
 	public ArrayList<BookVO> BookAll(){
 		return kguDAO.BookAll();
 	}
+	
+	public BookVO getBookInfo(BookVO bvo) {
+		return kguDAO.getBookInfo(bvo);
+	}
 }

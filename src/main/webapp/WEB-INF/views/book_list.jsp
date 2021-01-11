@@ -11,11 +11,10 @@
 </head>
 <body>
 	<c:forEach var = "List" items = "${alist}">
-		${List.book_name}<br>
+		<img src ="<spring:url value='/resources/img/${List.book_picture}'/>"><br>
+		<a href="getBookInfo.do?book_name=${List.book_name}">${List.book_name}</a><br>
+		<%-- <a href="list.jsp?name=<%= URLEncoder.encode(name, "UTF-8")%>">list로 이동</a> --%>
 		${List.book_price}<br>
-		${List.book_picture}<br>
-		<img src ="<spring:url value='/resources/img/book_123124123.jpg'/>">
-		<img src ="<spring:url value='/resources/img/${List.book_picture}'/>">
-</c:forEach>
+	</c:forEach>
 </body>
 </html> 

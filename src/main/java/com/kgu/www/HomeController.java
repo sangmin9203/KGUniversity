@@ -16,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -86,6 +87,12 @@ public class HomeController {
 		model.addAttribute("alist", alist);
 		
 		return "book_list";
+	}
+	
+	@RequestMapping("/getBookInfo.do")
+	public String getBookInfo(@ModelAttribute("bvo") BookVO bvo, Model model) throws Exception  {
+		model.addAttribute("bvo", kguService.getBookInfo(bvo)); //한 책에 대한 처리, 가져갈 Data
+		return "book_info";
 	}
 	
 }

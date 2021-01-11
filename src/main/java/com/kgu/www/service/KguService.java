@@ -10,5 +10,7 @@ public interface KguService {
 	
 	void bookInsertForm(BookVO bvo);
 	
-	ArrayList<BookVO> BookAll() throws Exception;;
+	ArrayList<BookVO> BookAll() throws Exception;
+	
+	BookVO getBookInfo(BookVO bvo) throws Exception;
 }
