@@ -11,7 +11,7 @@
 	<h2>mainScreen.jsp</h2>
 	
 	<script>
-		location.href="BookAll.do"
+		location.href="bookInsertForm.do"
 	</script>
 
 </body>
