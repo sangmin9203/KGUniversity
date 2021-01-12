@@ -16,6 +16,5 @@ ${bvo.book_writer}<br>
 ${bvo.book_price}<br>
 <pre><c:out value="${bvo.book_info}"/></pre><br>
 <pre><c:out value="${bvo.book_mokcha}"/></pre><br>
-${bvo.book_inventory}<br>
 </body>
 </html>

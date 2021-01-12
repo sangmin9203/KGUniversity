@@ -1,6 +1,7 @@
 package com.kgu.www.vo;
 
 public class BookVO {
+	private int book_num;
 	private String book_picture;
 	private String book_name;
 	private String book_writer;
@@ -22,6 +23,13 @@ public class BookVO {
 		this.book_info = book_info;
 		this.book_mokcha = book_mokcha;
 		this.book_inventory = book_inventory;
+	}
+	
+	public int getBook_num() {
+		return book_num;
+	}
+	public void setBook_num(int book_num) {
+		this.book_num = book_num;
 	}
 	public String getBook_picture() {
 		return book_picture;
