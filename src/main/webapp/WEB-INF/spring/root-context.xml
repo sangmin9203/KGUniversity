@@ -28,14 +28,13 @@
 		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory" /> 
 	</bean>
 	
-	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"> 
-		<property name="basePackage" value="com.kgu.www.service.dao" /> 
-	</bean>
+<!-- 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"> 
+		<property name="basePackage" value="com.kgu.www.Book.properties" /> 패키지변경 
+	</bean> -->
 	
-	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"> 
+	<!-- <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"> 
 		<property name="dataSource" ref="dataSource" /> 
-	</bean>
-	
-	<tx:annotation-driven transaction-manager="transactionManager"/> 
+	</bean> -->
+	<context:component-scan base-package="com.kgu.www"/> 
 	
 </beans>

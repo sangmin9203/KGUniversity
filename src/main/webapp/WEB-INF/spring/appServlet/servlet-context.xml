@@ -28,14 +28,5 @@
 		<beans:property name="maxUploadSize" value="20971520">
 		</beans:property> 
 	</beans:bean>
-	
 	<context:component-scan base-package="com.kgu.www" />
-	
-	
-	
-	
-	
-	
-	
-	
 </beans:beans>

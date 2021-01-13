@@ -4,19 +4,19 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <c:set var="path" value ="${pageContext.request.contextPath}"/>
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>책 판매 목록</title>
 </head>
 <body>
-
-	<h2>mainScreen.jsp</h2>
-	
-	<script>
-		location.href="${path}/book/bookAll.do"
-	</script>
-
+	<c:forEach items = "${List}" var = "List" >
+		<img src ="<spring:url value='/resources/img/${List.book_picture}'/>"><br>
+		<a href="${path}/book/getBookInfo.do?book_name=${List.book_name}">${List.book_name}</a><br>
+		${List.book_writer}<br>		
+		${List.book_price}<br>
+	</c:forEach>
 </body>
-</html>
+</html> 
