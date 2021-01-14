@@ -11,6 +11,8 @@ public interface BookDAO {
 	
 	BookVO getBookInfo(BookVO bvo) throws Exception;
 	
+	BookVO getBookInfoN(int boon_num) throws Exception;
+	
 	void updateBook(BookVO bvo) throws Exception;
 	
 	void deleteBook(String book_name) throws Exception;

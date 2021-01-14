@@ -25,8 +25,21 @@ public class BookVO {
 		this.book_mokcha = book_mokcha;
 		this.book_inventory = book_inventory;
 	}
+	
 	public void InsertVO(String book_picture, String book_name, String book_writer, int book_price, String book_info,
 			String book_mokcha, int book_inventory) {
+		this.book_picture = book_picture;
+		this.book_name = book_name;
+		this.book_writer = book_writer;
+		this.book_price = book_price;
+		this.book_info = book_info;
+		this.book_mokcha = book_mokcha;
+		this.book_inventory = book_inventory;
+	}
+	
+	public void UpdateVO(int book_num, String book_picture, String book_name, String book_writer, int book_price, String book_info,
+			String book_mokcha, int book_inventory) {
+		this.book_num = book_num;
 		this.book_picture = book_picture;
 		this.book_name = book_name;
 		this.book_writer = book_writer;

@@ -30,6 +30,11 @@ public class BookServiceImpl implements BookService {
 	}
 	
 	@Override
+	public BookVO getBookInfoN(int book_num) throws Exception {
+		return bookDAO.getBookInfoN(book_num);
+	}
+	
+	@Override
 	public void updateBook(BookVO bvo) throws Exception {
 		bookDAO.updateBook(bvo);
 	}

@@ -10,6 +10,8 @@ public interface BookService {
 	
 	BookVO getBookInfo(BookVO bvo) throws Exception;
 	
+	BookVO getBookInfoN(int book_num) throws Exception;
+	
 	void updateBook(BookVO bvo) throws Exception;
 	
 	void deleteBook(String book_name) throws Exception;

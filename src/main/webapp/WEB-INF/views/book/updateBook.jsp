@@ -12,9 +12,10 @@
 <title>책 등록 페이지</title>
 </head>
 <body>
-
+	${bvo.book_num}
 	<div class = container style="margin : auto; width:700px; align : center">
 		<form action ="${path}/book/updateBook.do" method = "post" enctype="multipart/form-data">
+		<input  type = "hidden" name = "book_num" value ="${bvo.book_num}"> 
 			<div class="form-group">
   				<label for="picture1">책 사진 첨부</label>
    					<input type="file" class="form-control" id="picture1" name="book_file">

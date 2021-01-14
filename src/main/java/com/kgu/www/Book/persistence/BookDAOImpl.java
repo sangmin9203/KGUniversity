@@ -32,6 +32,11 @@ public class BookDAOImpl implements BookDAO {
 	}
 	
 	@Override
+	public BookVO getBookInfoN(int book_num) throws Exception {
+		return sqlSession.selectOne(NAMESPACE+".getBookInfoN", book_num);
+	}
+	
+	@Override
 	public void updateBook(BookVO bvo) throws Exception {
 		sqlSession.update(NAMESPACE+".updateBook", bvo);
 	}
