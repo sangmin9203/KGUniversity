@@ -51,4 +51,24 @@ public class BookDAOImpl implements BookDAO {
 		return sqlSession.selectList(NAMESPACE+".bookAll");
 	}
 	
+	@Override
+	public List<BookVO> listPaging(int Page) throws Exception{
+				
+		Page = (Page-1)*10;
+		
+		if (Page<=0) {
+			Page =1;
+		} else {
+			Page = Page+1;
+		}
+		
+		return sqlSession.selectList(NAMESPACE+".listPaging", Page);
+	}
+
+
+
+
+
+
+
 }

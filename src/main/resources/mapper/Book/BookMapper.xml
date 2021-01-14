@@ -43,4 +43,15 @@
 		ORDER BY book_num DESC
 </select>
 
+<select id="listPaging" resultType = "BookVO">
+		 <!-- 부등호를 사용하기 위함 -->
+		<![CDATA[
+		SELECT * FROM (
+    				SELECT b.*, ROW_NUMBER() OVER(ORDER BY book_num DESC) AS RNUM
+    				FROM book b
+						)
+		WHERE RNUM BETWEEN #{Page} AND #{Page}+9
+		]]>
+</select>
+
 </mapper>

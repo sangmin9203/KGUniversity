@@ -18,4 +18,7 @@ public interface BookDAO {
 	void deleteBook(String book_name) throws Exception;
 	
 	List<BookVO> bookAll() throws Exception;
+	
+	/*페이징처리*/
+	List<BookVO> listPaging(int Page) throws Exception;
 }
