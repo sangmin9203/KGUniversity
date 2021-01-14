@@ -26,7 +26,6 @@ public class BookController {
 	private static final Logger logger = LoggerFactory.getLogger(BookController.class);
 	
 	private final BookService bookService;
-	private String savepoint ="/src/main/webapp/WEB-INF/img";
 	
 	@Inject
 	public BookController(BookService bookService) {
@@ -45,6 +44,7 @@ public class BookController {
 	public String bookInsertFormPOST(@RequestParam("book_file") MultipartFile book_file, @RequestParam HashMap<String,String> hashMap, RedirectAttributes rda)
 			throws Exception {
 		logger.info("등록...");
+		String savepoint ="C:\\Users\\pc\\Desktop\\KG_University\\src\\main\\webapp\\WEB-INF\\img";
 		File save = new File(savepoint,book_file.getOriginalFilename());
 		book_file.transferTo(save);
 		String book_picture = book_file.getOriginalFilename();
@@ -68,6 +68,7 @@ public class BookController {
 		model.addAttribute("List", bookService.bookAll());
 		return "/book/bookAll";
 	}
+	
 	//상세보기
 	@RequestMapping(value = "/getBookInfo.do", method = RequestMethod.GET)
 	public String getBookInfo(@ModelAttribute("bvo") BookVO bvo, Model model) throws Exception {
@@ -90,21 +91,20 @@ public class BookController {
 			, @ModelAttribute("bvo") BookVO bvo) throws Exception {
 		logger.info("수정처리..");
 		String book_picture = "";
+		String savepoint ="C:\\Users\\pc\\Desktop\\KG_University\\src\\main\\webapp\\resources\\img";
 		int book_num = (int) Integer.parseInt(hashMap.get("book_num"));
 		System.out.println();
 		BookVO bvo2 = bookService.getBookInfoN(book_num);
-		System.out.println(bvo2.getBook_picture());
-		/*System.out.println(bvo2.getBook_picture());*/
 		if(!book_file.getOriginalFilename().equals("")) {
 			File save = new File(savepoint, book_file.getOriginalFilename());
 			book_file.transferTo(save);
 			book_picture = book_file.getOriginalFilename();
-			/*File OriginFile = new File(savePoint+bvo2.getBook_picture());*/
-			/*if(OriginFile.exists())
+			File OriginFile = new File(savepoint+"\\"+bvo2.getBook_picture());
+			if(OriginFile.exists())
 				if(OriginFile.delete())
 					System.out.println("파일 삭제 성공");
 				else
-					System.out.println("파일 삭제 실패");*/
+					System.out.println("파일 삭제 실패");
 		} else {
 			book_picture = bvo2.getBook_picture();
 		}
@@ -118,7 +118,6 @@ public class BookController {
 		bvo = new BookVO();
 		bvo.UpdateVO(book_num, book_picture, book_name, book_writer, book_price, book_info, book_mokcha, book_inventory);
 		bookService.updateBook(bvo);
-		rda.addFlashAttribute("msg", "update 성공");
 		return "redirect:/book/bookAll.do";
 	}
 	
