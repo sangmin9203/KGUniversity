@@ -2,6 +2,7 @@ package com.kgu.www.Book.persistence;
 
 import java.util.List;
 
+import com.kgu.www.Book.paging.SupPaging;
 import com.kgu.www.Book.vo.BookVO;
 
 
@@ -19,6 +20,11 @@ public interface BookDAO {
 	
 	List<BookVO> bookAll() throws Exception;
 	
+	/*페이징처리 test 사용*/
+	List<BookVO> listPaging(int page) throws Exception;
+	
 	/*페이징처리*/
-	List<BookVO> listPaging(int Page) throws Exception;
+	List<BookVO> supPaging(SupPaging suppaging) throws Exception;
+	
+	
 }

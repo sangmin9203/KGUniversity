@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.kgu.www.Book.paging.SupPaging;
 import com.kgu.www.Book.persistence.BookDAO;
 import com.kgu.www.Book.vo.BookVO;
 
@@ -41,10 +42,22 @@ public class BookDAOTest {
 	}*/
 	
 	//페이징 처리 테스트
-	@Test
+	/*@Test
 	public void testlistPaging() throws Exception {
 		int Page = 3;
 		List<BookVO> list = bdao.listPaging(Page);
+		
+		for(BookVO bvo : list) {
+			logger.info(bvo.getBook_name());
+		}
+	}*/
+	
+	@Test
+	public void testsupPaging() throws Exception {
+		SupPaging supPaging = new SupPaging();
+		supPaging.setPage(3);
+		supPaging.setPerPageNum(10);
+		List<BookVO> list = bdao.supPaging(supPaging);
 		
 		for(BookVO bvo : list) {
 			logger.info(bvo.getBook_name());

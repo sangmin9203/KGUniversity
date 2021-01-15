@@ -50,7 +50,18 @@
     				SELECT b.*, ROW_NUMBER() OVER(ORDER BY book_num DESC) AS RNUM
     				FROM book b
 						)
-		WHERE RNUM BETWEEN #{Page} AND #{Page}+9
+		WHERE RNUM BETWEEN #{page} AND #{page}+9
+		]]>
+</select>
+
+<select id="supPaging" resultType = "BookVO">
+		 <!-- 부등호를 사용하기 위함 -->
+		<![CDATA[
+		SELECT * FROM (
+    				SELECT b.*, ROW_NUMBER() OVER(ORDER BY book_num DESC) AS RNUM
+    				FROM book b
+						)
+		WHERE RNUM BETWEEN #{pageStart} AND #{pageStart}+#{perPageNum}
 		]]>
 </select>
 

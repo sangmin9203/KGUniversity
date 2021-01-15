@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.kgu.www.Book.paging.SupPaging;
 import com.kgu.www.Book.vo.BookVO;
 
 @Repository
@@ -52,17 +53,22 @@ public class BookDAOImpl implements BookDAO {
 	}
 	
 	@Override
-	public List<BookVO> listPaging(int Page) throws Exception{
+	public List<BookVO> listPaging(int page) throws Exception{
 				
-		Page = (Page-1)*10;
+		page = (page-1)*10;
 		
-		if (Page<=0) {
-			Page =1;
+		if (page<=0) {
+			page =1;
 		} else {
-			Page = Page+1;
+			page = page+1;
 		}
 		
-		return sqlSession.selectList(NAMESPACE+".listPaging", Page);
+		return sqlSession.selectList(NAMESPACE+".listPaging", page);
+	}
+	
+	@Override
+	public List<BookVO> supPaging(SupPaging suppaging) throws Exception {
+		return sqlSession.selectList(NAMESPACE+".supPaging", suppaging);
 	}
 
 
