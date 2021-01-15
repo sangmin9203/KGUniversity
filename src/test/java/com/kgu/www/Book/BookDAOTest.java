@@ -42,20 +42,10 @@ public class BookDAOTest {
 	}*/
 	
 	//페이징 처리 테스트
-	/*@Test
-	public void testlistPaging() throws Exception {
-		int Page = 3;
-		List<BookVO> list = bdao.listPaging(Page);
-		
-		for(BookVO bvo : list) {
-			logger.info(bvo.getBook_name());
-		}
-	}*/
-	
 	@Test
 	public void testsupPaging() throws Exception {
 		SupPaging supPaging = new SupPaging();
-		supPaging.setPage(3);
+		supPaging.setPage(11);
 		supPaging.setPerPageNum(10);
 		List<BookVO> list = bdao.supPaging(supPaging);
 		

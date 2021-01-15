@@ -20,11 +20,13 @@ public interface BookDAO {
 	
 	List<BookVO> bookAll() throws Exception;
 	
-	/*페이징처리 test 사용*/
-	List<BookVO> listPaging(int page) throws Exception;
+	List<BookVO> supPaging(SupPaging supPaging) throws Exception; //페이징처리
 	
-	/*페이징처리*/
-	List<BookVO> supPaging(SupPaging suppaging) throws Exception;
+	int countBook(SupPaging supPaging) throws Exception; //책 목록 총 갯수
+	
+	
+	
+	
 	
 	
 }

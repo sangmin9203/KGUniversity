@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kgu.www.Book.paging.PageMaker;
+import com.kgu.www.Book.paging.SupPaging;
 import com.kgu.www.Book.service.BookService;
 import com.kgu.www.Book.vo.BookVO;
 
@@ -63,9 +65,16 @@ public class BookController {
 	
 	//목록 페이지 이동
 	@RequestMapping(value = "/bookAll.do", method = RequestMethod.GET)
-	public String BookAll(Model model) throws Exception {
+	public String SupPaging(Model model, SupPaging supPaging) throws Exception {
 		logger.info("목록 페이지..");
-		model.addAttribute("List", bookService.bookAll());
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setSupPaging(supPaging);
+		pageMaker.setTotalCount(bookService.countBook(supPaging)); //일단 임의로 값을 넣음
+		System.out.println("제발");
+		model.addAttribute("supPaging", bookService.supPaging(supPaging));
+		model.addAttribute("pageMaker", pageMaker);
+		
 		return "/book/bookAll";
 	}
 	

@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.kgu.www.Book.paging.SupPaging;
 import com.kgu.www.Book.persistence.BookDAO;
 import com.kgu.www.Book.vo.BookVO;
 
@@ -49,5 +50,14 @@ public class BookServiceImpl implements BookService {
 		return bookDAO.bookAll();
 	}
 	
+	@Override
+	public List<BookVO> supPaging(SupPaging supPaging) throws Exception{
+		return bookDAO.supPaging(supPaging);
+	}
+	
+	@Override
+	public int countBook(SupPaging supPaging) throws Exception {
+		return bookDAO.countBook(supPaging);
+	}
 
 }

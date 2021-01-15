@@ -43,26 +43,28 @@
 		ORDER BY book_num DESC
 </select>
 
-<select id="listPaging" resultType = "BookVO">
-		 <!-- 부등호를 사용하기 위함 -->
-		<![CDATA[
+<select id="supPaging" resultType = "BookVO">
 		SELECT * FROM (
     				SELECT b.*, ROW_NUMBER() OVER(ORDER BY book_num DESC) AS RNUM
     				FROM book b
 						)
-		WHERE RNUM BETWEEN #{page} AND #{page}+9
-		]]>
+		WHERE RNUM BETWEEN
+		<choose>
+			<when test="pageStart == 0">
+				#{pageStart} AND #{pageStart}+#{perPageNum}
+			</when>
+			<otherwise>
+				#{pageStart}+1 AND #{pageStart}+#{perPageNum}
+			</otherwise>
+		</choose>
 </select>
 
-<select id="supPaging" resultType = "BookVO">
-		 <!-- 부등호를 사용하기 위함 -->
-		<![CDATA[
-		SELECT * FROM (
-    				SELECT b.*, ROW_NUMBER() OVER(ORDER BY book_num DESC) AS RNUM
-    				FROM book b
-						)
-		WHERE RNUM BETWEEN #{pageStart} AND #{pageStart}+#{perPageNum}
-		]]>
+<select id = "countBook" resultType = "int">
+	<![CDATA[
+		SELECT COUNT(book_num)
+		FROM book
+		WHERE book_num>0
+	]]>
 </select>
 
 </mapper>
