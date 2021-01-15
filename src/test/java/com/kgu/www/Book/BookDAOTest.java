@@ -60,7 +60,7 @@ public class BookDAOTest {
 		List<BookVO> list = bdao.supPaging(supPaging);
 		
 		for(BookVO bvo : list) {
-			logger.info(bvo.getBook_name());
+			logger.info(bvo.getBook_name());//
 		}
 	}
 }
