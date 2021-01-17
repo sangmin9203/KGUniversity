@@ -15,23 +15,32 @@
 ${bvo.book_name}<br>
 ${bvo.book_writer}<br>
 ${bvo.book_price}<br>
+${bvo.book_inventory}<br>
 <pre><c:out value="${bvo.book_info}"/></pre><br>
 <pre><c:out value="${bvo.book_mokcha}"/></pre><br>
 
 
-<button type = "button" onclick = "history.go(-1)">목록</button>
-<form action ="${path}/book/updateBook.do" method = "GET">
-	<input  type = "hidden" name = "book_name" value ="${bvo.book_name}">
-	<input  type = "hidden" name = "page" value ="${supPaging.page}">
-	<input  type = "hidden" name = "perPageNum" value ="${supPaging.perPageNum}">
-	<button type = "submit">수정</button>
-</form>
-<form action ="${path}/book/deleteBook.do" method = "POST">
-	<input  type = "hidden" name = "book_name" value ="${bvo.book_name}"> 
-	<input  type = "hidden" name = "page" value ="${supPaging.page}">
-	<input  type = "hidden" name = "perPageNum" value ="${supPaging.perPageNum}">
-	<button type = "submit">삭제</button>
-</form>
+<% int admin = 1;
+	if (admin == 1){ %>
+	<button type = "button" onclick = "history.go(-1)">목록</button>
+<% } else if (admin == 0) { %>
+	
+	<!-- 관리자 로그인시 보여야할 버튼 -->
+	<button type = "button" onclick = "history.go(-1)">목록</button>
+	<form action ="${path}/book/updateBook.do" method = "GET">
+		<input  type = "hidden" name = "book_name" value ="${bvo.book_name}">
+		<input  type = "hidden" name = "page" value ="${supPaging.page}">
+		<input  type = "hidden" name = "perPageNum" value ="${supPaging.perPageNum}">
+		<button type = "submit">수정</button>
+	</form>
+	<form action ="${path}/book/deleteBook.do" method = "POST">
+		<input  type = "hidden" name = "book_name" value ="${bvo.book_name}"> 
+		<input  type = "hidden" name = "page" value ="${supPaging.page}">
+		<input  type = "hidden" name = "perPageNum" value ="${supPaging.perPageNum}">
+		<button type = "submit" onclick="return confirm('삭제하시겠습니까?')">삭제</button>
+	</form>
+<% } %>
+<!-- ----------------------------------------------------------------------  -->
 
 </body>
 </html>
