@@ -1,5 +1,8 @@
 package com.kgu.www.Book.paging;
 
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
+
 public class PageMaker {
 	private int totalCount; //게시글 전체 갯수
 	private int startPage; //시작페이지 번호
@@ -84,6 +87,14 @@ public class PageMaker {
 
 	public SupPaging getSupPaging() {
 		return supPaging;
+	}
+	
+	public String makeQuery(int page) {
+		UriComponents uri = UriComponentsBuilder.newInstance()
+				.queryParam("page", page)
+				.queryParam("perPageNum", supPaging.getPerPageNum())
+				.build();
+		return uri.toUriString();
 	}
 	 
 	 

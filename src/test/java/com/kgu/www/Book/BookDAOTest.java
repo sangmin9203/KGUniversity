@@ -9,6 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import com.kgu.www.Book.paging.SupPaging;
 import com.kgu.www.Book.persistence.BookDAO;
@@ -25,10 +27,10 @@ public class BookDAOTest {
 	private BookDAO bdao;
 	
 	//db 입력
-	@Test
+	/*@Test
 	public void testCreate() throws Exception {
 		BookVO bvo = new BookVO();
-		for(int i = ; i<=100; i++) {
+		for(int i = 101; i<=1000; i++) {
 		bvo.setBook_picture(i+"번째글");
 		bvo.setBook_name(i+"번째글");
 		bvo.setBook_writer("글쓴이");
@@ -39,7 +41,7 @@ public class BookDAOTest {
 		
 		bdao.bookInsertForm(bvo);
 		}
-	}
+	}*/
 	
 	//페이징 처리 테스트
 	/*@Test
@@ -53,4 +55,18 @@ public class BookDAOTest {
 			logger.info(bvo.getBook_name());//
 		}
 	}*/
+	
+	//URI CHECK //글 상세보기 이후 글목록으로 돌아왔을때 그페이지의 페이지목록이 보이도록
+	@Test
+	public void testURI() throws Exception {
+		UriComponents uri = UriComponentsBuilder.newInstance().path("/book/getBookInfo.do")
+				.path("/{module}/{page}")
+				.queryParam("book_name", "1000번째글")
+				.queryParam("perPageNum", 10)
+				.build();
+		
+		logger.info("/book/getBookInfo.do?book_name=1000번째글&perPageNum=10");
+		logger.info(uri.toString());
+				
+	}
 }

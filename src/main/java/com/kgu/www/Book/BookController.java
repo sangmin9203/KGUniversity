@@ -79,7 +79,8 @@ public class BookController {
 	
 	//상세보기
 	@RequestMapping(value = "/getBookInfo.do", method = RequestMethod.GET)
-	public String getBookInfo(@ModelAttribute("bvo") BookVO bvo, Model model) throws Exception {
+	public String getBookInfo(@ModelAttribute("bvo") BookVO bvo,@ModelAttribute("supPaging") SupPaging supPaging,
+				Model model) throws Exception {
 		logger.info("글 상세보기...");
 		model.addAttribute("bvo", bookService.getBookInfo(bvo));
 		return "/book/getBookInfo";
@@ -87,7 +88,8 @@ public class BookController {
 	
 	//수정 페이지 이동
 	@RequestMapping(value="/updateBook.do", method = RequestMethod.GET)
-	public String updateBookGET(@ModelAttribute("bvo") BookVO bvo, Model model) throws Exception {
+	public String updateBookGET(@ModelAttribute("bvo") BookVO bvo, @ModelAttribute("supPaging") SupPaging supPaging
+			, Model model) throws Exception {
 		logger.info("수정 처리 페이지 이동");
 		model.addAttribute("bvo", bookService.getBookInfo(bvo));
 		return "/book/updateBook";
@@ -96,7 +98,7 @@ public class BookController {
 	//수정처리
 	@RequestMapping(value="/updateBook.do", method = RequestMethod.POST)
 	public String updateBookPOST(@RequestParam(value = "book_file", required = false) MultipartFile book_file, @RequestParam HashMap<String,String> hashMap, RedirectAttributes rda
-			, @ModelAttribute("bvo") BookVO bvo) throws Exception {
+			, @ModelAttribute("bvo") BookVO bvo,SupPaging supPaging) throws Exception {
 		logger.info("수정처리..");
 		String book_picture = "";
 		String savepoint ="C:\\Users\\pc\\Desktop\\KG_University\\src\\main\\webapp\\resources\\img";
@@ -126,14 +128,19 @@ public class BookController {
 		bvo = new BookVO();
 		bvo.UpdateVO(book_num, book_picture, book_name, book_writer, book_price, book_info, book_mokcha, book_inventory);
 		bookService.updateBook(bvo);
+		rda.addAttribute("page", supPaging.getPage());
+		rda.addAttribute("perPageNum", supPaging.getPerPageNum());
 		return "redirect:/book/bookAll.do";
 	}
 	
 	//삭제처리
 	@RequestMapping(value="/deleteBook.do", method = RequestMethod.POST)
-	public String deleteBook(@RequestParam("book_name") String book_name, RedirectAttributes rda) throws Exception {
+	public String deleteBook(@RequestParam("book_name") String book_name, RedirectAttributes rda
+			, SupPaging supPaging) throws Exception {
 		logger.info("삭제처리..");
 		bookService.deleteBook(book_name);
+		rda.addAttribute("page", supPaging.getPage());
+		rda.addAttribute("perPageNum", supPaging.getPerPageNum());
 		rda.addFlashAttribute("msg", "delete 성공");
 		return "redirect:/book/bookAll.do";
 	}

@@ -15,6 +15,9 @@
 	${bvo.book_num}
 	<div class = container style="margin : auto; width:700px; align : center">
 		<form action ="${path}/book/updateBook.do" method = "post" enctype="multipart/form-data">
+		<input  type = "hidden" name = "book_name" value ="${bvo.book_name}">
+		<input  type = "hidden" name = "page" value ="${supPaging.page}">
+		<input  type = "hidden" name = "perPageNum" value ="${supPaging.perPageNum}">
 		<input  type = "hidden" name = "book_num" value ="${bvo.book_num}"> 
 			<div class="form-group">
   				<label for="picture1">책 사진 첨부</label>
@@ -47,7 +50,7 @@
    
 	
 	<input style = "margin:8px" class="btn btn-success" type = "submit" value = "등록" onclick="return confirm('등록하시겠습니까?')">
-	<input style = "margin:8px" class="btn btn-warning" type = "reset" value = "취소">
+	<input style = "margin:8px" class="btn btn-warning" type = "button" value = "취소" onclick="history.back(-1)">
 	</form>
 </div>
 </body>

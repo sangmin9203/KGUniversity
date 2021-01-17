@@ -14,7 +14,7 @@
 <body>
 	<c:forEach items = "${supPaging}" var = "List" >
 		<img src ="<spring:url value='/resources/img/${List.book_picture}'/>"><br>
-		<a href="${path}/book/getBookInfo.do?book_name=${List.book_name}">${List.book_name}</a><br>
+		<a href="${path}/book/getBookInfo.do${pageMaker.makeQuery(pageMaker.supPaging.page)}&book_name=${List.book_name}">${List.book_name}</a><br>
 		${List.book_writer}<br>		
 		${List.book_price}<br>
 	</c:forEach>
@@ -26,7 +26,7 @@
      </c:if>
 	 <c:forEach begin="${pageMaker.startPage}" end ="${pageMaker.endPage}" var ="idx">
 		<li <c:out value ="${pageMaker.supPaging.page == idx ? '' : ''}"/>>
-		<a href="${path}/book/bookAll.do?page=${idx}">${idx}</a></li>
+		<a href="${path}/book/bookAll.do${pageMaker.makeQuery(idx)}">${idx}</a></li>
 	</c:forEach>
 	<c:if test="${pageMaker.next && pageMaker.endPage >0}">
 		<li><a href ="${path}/book/bookAll.do?page=${pageMaker.endPage+1}">다음</a></li>
