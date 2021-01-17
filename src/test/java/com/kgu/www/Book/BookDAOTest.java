@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.kgu.www.Book.paging.Search;
 import com.kgu.www.Book.paging.SupPaging;
 import com.kgu.www.Book.persistence.BookDAO;
 import com.kgu.www.Book.vo.BookVO;
@@ -57,7 +58,7 @@ public class BookDAOTest {
 	}*/
 	
 	//URI CHECK //글 상세보기 이후 글목록으로 돌아왔을때 그페이지의 페이지목록이 보이도록
-	@Test
+	/*@Test
 	public void testURI() throws Exception {
 		UriComponents uri = UriComponentsBuilder.newInstance().path("/book/getBookInfo.do")
 				.path("/{module}/{page}")
@@ -68,5 +69,24 @@ public class BookDAOTest {
 		logger.info("/book/getBookInfo.do?book_name=1000번째글&perPageNum=10");
 		logger.info(uri.toString());
 				
+	}*/
+	
+	//검색처리 확인
+	@Test
+	public void search() throws Exception {
+		Search search = new Search();
+		search.setPage(1);
+		search.setKeyword("아무개");
+		search.setSearchType("book_writer");
+		
+		logger.info("===================");
+		List<BookVO> bvo = bdao.searchBook(search);
+		
+		for(BookVO book : bvo) {
+			logger.info(book.getBook_name());
+		}
+		
+		logger.info("=====================");
+		logger.info("searched book count" + bdao.countSearchedBook(search));
 	}
 }

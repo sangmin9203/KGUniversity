@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.kgu.www.Book.paging.Search;
 import com.kgu.www.Book.paging.SupPaging;
 import com.kgu.www.Book.vo.BookVO;
 
@@ -58,8 +59,18 @@ public class BookDAOImpl implements BookDAO {
 	}
 	
 	@Override
-	public int countBook(SupPaging supPaging) {
+	public int countBook(SupPaging supPaging) throws Exception {
 		return sqlSession.selectOne(NAMESPACE+".countBook", supPaging);
+	}
+	
+	@Override
+	public List<BookVO> searchBook(Search search) throws Exception {
+		return sqlSession.selectList(NAMESPACE+".searchBook", search);
+	}
+	
+	@Override
+	public int countSearchedBook(Search search) throws Exception {
+		return sqlSession.selectOne(NAMESPACE+".countSearchedBook", search);
 	}
 
 

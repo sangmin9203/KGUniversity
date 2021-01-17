@@ -67,4 +67,41 @@
 	]]>
 </select>
 
+<select id="searchBook" resultType = "BookVO">
+		SELECT * FROM (
+    				SELECT b.*, ROW_NUMBER() OVER(ORDER BY book_num DESC) AS RNUM
+    				FROM book b
+    				WHERE book_num > 0 <include refid = "search"/>
+						)
+		WHERE RNUM BETWEEN
+		<choose>
+			<when test="pageStart == 0">
+				#{pageStart} AND #{pageStart}+#{perPageNum}
+			</when>
+			<otherwise>
+				#{pageStart}+1 AND #{pageStart}+#{perPageNum}
+			</otherwise>
+		</choose>
+</select>
+
+<select id = "countSearchedBook" resultType = "int">
+	<![CDATA[
+		SELECT COUNT(book_num)
+		FROM book
+		WHERE book_num > 0
+	]]>
+	<include refid="search"/>
+</select>
+
+<sql id ="search">
+	<if test="searchType !=null">
+		<if test = "searchType == 'book_name'.toString()">
+			AND book_name LIKE '%'||#{keyword}||'%'
+		</if>
+		<if test = "searchType == 'book_writer'.toString()">
+			AND book_writer LIKE '%'||#{keyword}||'%'
+		</if>
+	</if>
+</sql>
+
 </mapper>

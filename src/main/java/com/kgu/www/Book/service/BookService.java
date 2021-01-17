@@ -2,6 +2,7 @@ package com.kgu.www.Book.service;
 
 import java.util.List;
 
+import com.kgu.www.Book.paging.Search;
 import com.kgu.www.Book.paging.SupPaging;
 import com.kgu.www.Book.vo.BookVO;
 
@@ -22,5 +23,9 @@ public interface BookService {
 	List<BookVO> supPaging(SupPaging supPaging) throws Exception;
 	
 	int countBook(SupPaging supPaging) throws Exception;
+	
+	List<BookVO> searchBook(Search search) throws Exception;
+	
+	int countSearchedBook(Search search) throws Exception;
 	
 }

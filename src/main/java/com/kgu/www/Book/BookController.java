@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kgu.www.Book.paging.PageMaker;
+import com.kgu.www.Book.paging.Search;
 import com.kgu.www.Book.paging.SupPaging;
 import com.kgu.www.Book.service.BookService;
 import com.kgu.www.Book.vo.BookVO;
@@ -143,5 +144,21 @@ public class BookController {
 		rda.addAttribute("perPageNum", supPaging.getPerPageNum());
 		rda.addFlashAttribute("msg", "delete 성공");
 		return "redirect:/book/bookAll.do";
+	}
+	
+	//검색처리
+	@RequestMapping(value = "/search.do", method = RequestMethod.GET)
+	public String searchBook(@ModelAttribute("search")Search search
+			, Model model) throws Exception {
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setSupPaging(search);
+		pageMaker.setTotalCount(bookService.countSearchedBook(search));
+		
+		model.addAttribute("book", bookService.searchBook(search));
+		model.addAttribute("pageMaker", pageMaker);
+		
+		return "book/searchBook";
+		
 	}
 }

@@ -14,15 +14,15 @@
 <body>
 <form action = "search.do" method="get">
 <select name = "searchType" id = "searchType">
-	<option value = "book_name" <c:out value = "${search.searchType eq 'book_title' ? 'selected' : ''}"/>>책 제목</option>
+	<option value = "book_name" <c:out value = "${search.searchType eq 'book_name' ? 'selected' : ''}"/>>책 제목</option>
 	<option value = "book_writer" <c:out value = "${search.searchType eq 'book_writer' ? 'selected' : ''}"/>>글쓴이</option>
 </select>
 <input type = "keyword" name = 'keyword' value = "${search.keyword}">
 <input type = "submit" value = "검색">
 </form><br>
-	<c:forEach items = "${supPaging}" var = "List" >
+	<c:forEach items = "${book}" var = "List" >
 		<img src ="<spring:url value='/resources/img/${List.book_picture}'/>"><br>
-		<a href="${path}/book/getBookInfo.do${pageMaker.makeQuery(pageMaker.supPaging.page)}&book_name=${List.book_name}">${List.book_name}</a><br>
+		<a href="${path}/book/getBookInfo.do${pageMaker.makeSearch(pageMaker.supPaging.page)}&book_name=${List.book_name}">${List.book_name}</a><br>
 		${List.book_writer}<br>		
 		${List.book_price}<br>
 	</c:forEach>
@@ -30,14 +30,14 @@
 	<br><br>
 	
 	<c:if test="${pageMaker.prev}">
-		<li><a href="${path}/book/bookAll.do?page=${pageMaker.startPage-1}">이전</a></li>
+		<li><a href="${path}/book/search.do${pageMaker.makeSearch(pageMaker.startPage-1)}">이전</a></li>
      </c:if>
 	 <c:forEach begin="${pageMaker.startPage}" end ="${pageMaker.endPage}" var ="idx">
 		<li <c:out value ="${pageMaker.supPaging.page == idx ? '' : ''}"/>>
-		<a href="${path}/book/bookAll.do${pageMaker.makeQuery(idx)}">${idx}</a></li>
+		<a href="${path}/book/search.do${pageMaker.makeSearch(idx)}">${idx}</a></li>
 	</c:forEach>
 	<c:if test="${pageMaker.next && pageMaker.endPage >0}">
-		<li><a href ="${path}/book/bookAll.do?page=${pageMaker.endPage+1}">다음</a></li>
+		<li><a href ="${path}/book/search.do${pageMaker.makeSearch(pageMaker.endPage+1)}">다음</a></li>
 	</c:if>
 </body>
 </html>
