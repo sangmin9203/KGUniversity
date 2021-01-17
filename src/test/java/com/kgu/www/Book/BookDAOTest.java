@@ -24,11 +24,11 @@ public class BookDAOTest {
 	@Autowired
 	private BookDAO bdao;
 	
-	/*//db 입력 테스트
+	//db 입력
 	@Test
 	public void testCreate() throws Exception {
 		BookVO bvo = new BookVO();
-		for(int i = 0; i<=100; i++) {
+		for(int i = ; i<=100; i++) {
 		bvo.setBook_picture(i+"번째글");
 		bvo.setBook_name(i+"번째글");
 		bvo.setBook_writer("글쓴이");
@@ -39,10 +39,10 @@ public class BookDAOTest {
 		
 		bdao.bookInsertForm(bvo);
 		}
-	}*/
+	}
 	
 	//페이징 처리 테스트
-	@Test
+	/*@Test
 	public void testsupPaging() throws Exception {
 		SupPaging supPaging = new SupPaging();
 		supPaging.setPage(11);
@@ -52,5 +52,5 @@ public class BookDAOTest {
 		for(BookVO bvo : list) {
 			logger.info(bvo.getBook_name());//
 		}
-	}
+	}*/
 }

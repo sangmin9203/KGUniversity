@@ -70,8 +70,7 @@ public class BookController {
 		
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setSupPaging(supPaging);
-		pageMaker.setTotalCount(bookService.countBook(supPaging)); //일단 임의로 값을 넣음
-		System.out.println("제발");
+		pageMaker.setTotalCount(bookService.countBook(supPaging));
 		model.addAttribute("supPaging", bookService.supPaging(supPaging));
 		model.addAttribute("pageMaker", pageMaker);
 		
