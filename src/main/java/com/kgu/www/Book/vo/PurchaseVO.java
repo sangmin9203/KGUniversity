@@ -20,6 +20,12 @@ public class PurchaseVO {
 		this.purchase_date = purchase_date;
 	}
 	
+	public PurchaseVO(String user_id, String book_name, int book_amount) {
+		this.user_id = user_id;
+		this.book_name = book_name;
+		this.book_amount = book_amount;
+	}
+
 	public int getPurchase_num() {
 		return purchase_num;
 	}

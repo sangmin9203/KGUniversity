@@ -13,10 +13,6 @@
 <body>
 <img src ="<spring:url value='/resources/img/${bvo.book_picture}'/>"><br>
 ${bvo.book_name}<br>
-${bvo.book_writer}<br>
-${bvo.book_price}<br>
-${bvo.book_inventory}<br>
-<pre><c:out value="${bvo.book_info}"/></pre><br>
-<pre><c:out value="${bvo.book_mokcha}"/></pre><br>
+${purchase.book_amount}<br>
 </body>
 </html>

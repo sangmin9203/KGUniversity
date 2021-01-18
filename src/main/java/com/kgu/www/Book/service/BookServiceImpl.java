@@ -43,6 +43,11 @@ public class BookServiceImpl implements BookService {
 	}
 	
 	@Override
+	public void updateInventory(BookVO bvo) throws Exception{
+		bookDAO.updateInventory(bvo);
+	}
+	
+	@Override
 	public void deleteBook(String book_name) throws Exception{
 		bookDAO.deleteBook(book_name);
 	}
@@ -75,6 +80,11 @@ public class BookServiceImpl implements BookService {
 	@Override
 	public void purchaseInsertForm(PurchaseVO pvo) throws Exception {
 		bookDAO.purchaseInsertForm(pvo);
+	}
+	
+	@Override
+	public List<PurchaseVO> purchaseList(PurchaseVO pvo) throws Exception{
+		return bookDAO.purchaseList(pvo);
 	}
 
 }

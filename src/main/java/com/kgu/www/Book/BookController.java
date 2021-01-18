@@ -21,6 +21,7 @@ import com.kgu.www.Book.paging.Search;
 import com.kgu.www.Book.paging.SupPaging;
 import com.kgu.www.Book.service.BookService;
 import com.kgu.www.Book.vo.BookVO;
+import com.kgu.www.Book.vo.PurchaseVO;
 
 @Controller
 @RequestMapping("/book")
@@ -164,11 +165,34 @@ public class BookController {
 	
 	//구입 처리
 	@RequestMapping(value = "/purchase.do", method = RequestMethod.POST)
-	public String purchaseInsertForm(@RequestParam HashMap<String,String> hashMap,@ModelAttribute("bvo") BookVO bvo, Model model) {
-		bvo.getBook_name();
-		bvo.getBook_inventory();
-		hashMap.get("purchase_amount");
+	public String purchaseInsertForm(@RequestParam HashMap<String,String> hashMap,
+			@ModelAttribute("bvo") BookVO bvo, Model model) throws Exception {
+		String user_id = hashMap.get("user_id");
+		String book_name = bvo.getBook_name();
+		int book__tamount = bvo.getBook_inventory();
+		int book_amount = Integer.parseInt(hashMap.get("purchase_amount"));
+		int book_inventory = book__tamount - book_amount;
+		int book_num = bvo.getBook_num();
+		System.out.println(book_num);
+		System.out.println(user_id);
 		System.out.println(bvo.getBook_name());
+		System.out.println(book__tamount);
+		System.out.println(book_amount);
+		System.out.println(book_inventory);
+		PurchaseVO pvo = new PurchaseVO(user_id, book_name, book_amount);
+		bookService.purchaseInsertForm(pvo);
+		BookVO inventory = new BookVO(book_num, book_inventory);
+		bookService.updateInventory(inventory);
+		model.addAttribute("pvo", pvo);
+		model.addAttribute("bvo", bookService.getBookInfo(bvo));
+		return "redirect:/book/purchaseList.do";
+	}
+	
+	@RequestMapping(value = "/purchaseList.do", method = RequestMethod.GET)
+	public String getPurchaseInfo(@ModelAttribute("pvo") PurchaseVO pvo,@ModelAttribute("bvo") BookVO bvo, Model model) throws Exception {
+		
+		/*model.addAttribute("pvo", bookService.purchaseList(pvo));
+		model.addAttribute("bvo", bookService.getBookInfo(bvo));*/
 		return "/book/purchaseList";
 	}
 }

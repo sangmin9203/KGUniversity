@@ -32,6 +32,12 @@
 		WHERE book_num = #{book_num}
 </update>
 
+<update id="updateInventory">
+		UPDATE book
+		SET book_inventory = #{book_inventory}
+		WHERE book_num = #{book_num}
+</update>
+
 <delete id ="deleteBook">
 		DELETE FROM book
 		WHERE book_name = #{book_name}
@@ -110,17 +116,10 @@
      	VALUES (purchase_num_seq.NEXTVAL, #{user_id}, #{book_name}, #{book_amount}, sysdate)
 </insert>
 
-<select id ="purchaseAll" resultType = "PurchaseVO">
+<select id ="purchaseList" resultType = "PurchaseVO">
 		SELECT purchase_num, user_id, book_name, book_amount, book_date 
 		FROM book_purchase
-		WHERE purchase_num > 0
-		ORDER BY book_date DESC
-</select>
-
-<select id ="getPurchaseInfo" resultType = "PurchaseVO">
-		SELECT purchase_num, user_id, book_name, book_amount, book_date 
-		FROM book_purchase
-		WHERE purchase_num > 0 and user_id = #{user_id}
+		WHERE purchase_num > 0 AND user_id = #{user_id}
 		ORDER BY book_date DESC
 </select>
 

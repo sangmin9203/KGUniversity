@@ -17,6 +17,8 @@ public interface BookService {
 	
 	void updateBook(BookVO bvo) throws Exception;
 	
+	void updateInventory(BookVO bvo) throws Exception;
+	
 	void deleteBook(String book_name) throws Exception;
 	
 	List<BookVO> bookAll() throws Exception;
@@ -30,6 +32,8 @@ public interface BookService {
 	int countSearchedBook(Search search) throws Exception;
 	
 	void purchaseInsertForm(PurchaseVO pvo) throws Exception;
+	
+	List<PurchaseVO> purchaseList(PurchaseVO pvo) throws Exception;
 	
 	
 }

@@ -15,15 +15,23 @@
 ${bvo.book_name}<br>
 ${bvo.book_writer}<br>
 ${bvo.book_price}<br>
-<form action = "purchaseList.do" method = "POST">
-<select>
-	<c:forEach var = "book_amount" begin="1" end = "${bvo.book_inventory}" step = "1" varStatus="a" >
-		<option name = "book_amount">${book_amount}</option>
-	</c:forEach>
-</select>
-(재고 : ${bvo.book_inventory})<br>
+	<form action = "${path}/book/purchase.do" method = "POST">
+			<input type = "hidden" name = "user_id" value = "user_id">
+			<input type = "hidden" name = "book_num" value = "${bvo.book_num}">
+			<input type = "hidden" name = "book_picture" value = "${bvo.book_picture}">
+			<input type = "hidden" name = "book_name" value = "${bvo.book_name}">
+			<input type = "hidden" name = "book_inventory" value = "${bvo.book_inventory}">
+	<select name = "purchase_amount">
+		<c:forEach var = "book_amount" begin="1" end = "${bvo.book_inventory}" step = "1" varStatus="a" >
+			<option>${book_amount}</option>
+		</c:forEach>
+	</select>
+	<button type = "submit" onclick="return confirm('구매하시겠습니까?')">구매</button>
 </form>
-<pre><c:out value="${bvo.book_info}"/></pre><br>
+(재고 : ${bvo.book_inventory})<br>
+
+<br>
+<pre><c:out value="${bvo.book_info}"/></pre>
 <pre><c:out value="${bvo.book_mokcha}"/></pre><br>
 
 

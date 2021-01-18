@@ -45,6 +45,11 @@ public class BookDAOImpl implements BookDAO {
 	}
 	
 	@Override
+	public void updateInventory(BookVO bvo) throws Exception{
+		sqlSession.update(NAMESPACE+".updateInventory", bvo);
+	}
+	
+	@Override
 	public void deleteBook(String book_name) throws Exception {
 		sqlSession.delete(NAMESPACE+".deleteBook", book_name);
 	}
@@ -80,8 +85,8 @@ public class BookDAOImpl implements BookDAO {
 	}
 
 	@Override
-	public List<PurchaseVO> purchaseAll(PurchaseVO pvo) throws Exception{
-		return sqlSession.selectList(NAMESPACE+".purchaseAll", pvo);
+	public List<PurchaseVO> purchaseList(PurchaseVO pvo) throws Exception{
+		return sqlSession.selectList(NAMESPACE+".purchaseList", pvo);
 	}
 
 
