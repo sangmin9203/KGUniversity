@@ -28,6 +28,7 @@
 			, book_price = #{book_price}
 			, book_info = #{book_info}
 			, book_mokcha = #{book_mokcha}
+			, book_inventory = #{book_inventory}
 		WHERE book_num = #{book_num}
 </update>
 
@@ -103,5 +104,24 @@
 		</if>
 	</if>
 </sql>
+
+<insert id="purchaseInsertForm">
+		INSERT INTO book_purchase  
+     	VALUES (purchase_num_seq.NEXTVAL, #{user_id}, #{book_name}, #{book_amount}, sysdate)
+</insert>
+
+<select id ="purchaseAll" resultType = "PurchaseVO">
+		SELECT purchase_num, user_id, book_name, book_amount, book_date 
+		FROM book_purchase
+		WHERE purchase_num > 0
+		ORDER BY book_date DESC
+</select>
+
+<select id ="getPurchaseInfo" resultType = "PurchaseVO">
+		SELECT purchase_num, user_id, book_name, book_amount, book_date 
+		FROM book_purchase
+		WHERE purchase_num > 0 and user_id = #{user_id}
+		ORDER BY book_date DESC
+</select>
 
 </mapper>

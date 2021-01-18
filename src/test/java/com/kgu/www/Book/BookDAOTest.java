@@ -16,6 +16,7 @@ import com.kgu.www.Book.paging.Search;
 import com.kgu.www.Book.paging.SupPaging;
 import com.kgu.www.Book.persistence.BookDAO;
 import com.kgu.www.Book.vo.BookVO;
+import com.kgu.www.Book.vo.PurchaseVO;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -42,6 +43,16 @@ public class BookDAOTest {
 		
 		bdao.bookInsertForm(bvo);
 		}
+	}*/
+	
+	/*@Test
+	public void purchaseInsert() throws Exception{
+		PurchaseVO pvo = new PurchaseVO();
+		pvo.setUser_id("asdf");
+		pvo.setBook_name("대학수학");
+		pvo.setBook_amount(1);
+		
+		bdao.purchaseInsertForm(pvo);
 	}*/
 	
 	//페이징 처리 테스트
@@ -72,7 +83,7 @@ public class BookDAOTest {
 	}*/
 	
 	//검색처리 확인
-	@Test
+	/*@Test
 	public void search() throws Exception {
 		Search search = new Search();
 		search.setPage(1);
@@ -88,5 +99,5 @@ public class BookDAOTest {
 		
 		logger.info("=====================");
 		logger.info("searched book count" + bdao.countSearchedBook(search));
-	}
+	}*/
 }

@@ -6,5 +6,6 @@
 	<typeAliases>
 		<typeAlias alias = "BookVO" type="com.kgu.www.Book.vo.BookVO"/>
 		<typeAlias alias = "UpdateVO" type="com.kgu.www.Book.vo.BookVO"/>
+		<typeAlias alias = "PurchaseVO" type="com.kgu.www.Book.vo.PurchaseVO"/>
 	</typeAliases>
 </configuration>

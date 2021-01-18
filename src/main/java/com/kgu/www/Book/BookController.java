@@ -161,4 +161,14 @@ public class BookController {
 		return "book/searchBook";
 		
 	}
+	
+	//구입 처리
+	@RequestMapping(value = "/purchase.do", method = RequestMethod.POST)
+	public String purchaseInsertForm(@RequestParam HashMap<String,String> hashMap,@ModelAttribute("bvo") BookVO bvo, Model model) {
+		bvo.getBook_name();
+		bvo.getBook_inventory();
+		hashMap.get("purchase_amount");
+		System.out.println(bvo.getBook_name());
+		return "/book/purchaseList";
+	}
 }

@@ -15,16 +15,22 @@
 ${bvo.book_name}<br>
 ${bvo.book_writer}<br>
 ${bvo.book_price}<br>
-${bvo.book_inventory}<br>
+<form action = "purchaseList.do" method = "POST">
+<select>
+	<c:forEach var = "book_amount" begin="1" end = "${bvo.book_inventory}" step = "1" varStatus="a" >
+		<option name = "book_amount">${book_amount}</option>
+	</c:forEach>
+</select>
+(재고 : ${bvo.book_inventory})<br>
+</form>
 <pre><c:out value="${bvo.book_info}"/></pre><br>
 <pre><c:out value="${bvo.book_mokcha}"/></pre><br>
 
 
-<% int admin = 1;
+<% int admin = 0;
 	if (admin == 1){ %>
 	<button type = "button" onclick = "history.go(-1)">목록</button>
 <% } else if (admin == 0) { %>
-	
 	<!-- 관리자 로그인시 보여야할 버튼 -->
 	<button type = "button" onclick = "history.go(-1)">목록</button>
 	<form action ="${path}/book/updateBook.do" method = "GET">

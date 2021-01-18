@@ -10,6 +10,7 @@ import com.kgu.www.Book.paging.Search;
 import com.kgu.www.Book.paging.SupPaging;
 import com.kgu.www.Book.persistence.BookDAO;
 import com.kgu.www.Book.vo.BookVO;
+import com.kgu.www.Book.vo.PurchaseVO;
 
 @Service
 public class BookServiceImpl implements BookService {
@@ -52,7 +53,7 @@ public class BookServiceImpl implements BookService {
 	}
 	
 	@Override
-	public List<BookVO> supPaging(SupPaging supPaging) throws Exception{
+	public List<BookVO> supPaging(SupPaging supPaging) throws Exception {
 		return bookDAO.supPaging(supPaging);
 	}
 	
@@ -62,13 +63,18 @@ public class BookServiceImpl implements BookService {
 	}
 	
 	@Override
-	public List<BookVO> searchBook(Search search) throws Exception{
+	public List<BookVO> searchBook(Search search) throws Exception {
 		return bookDAO.searchBook(search);
 	}
 	
 	@Override
 	public int countSearchedBook(Search search) throws Exception {
 		return bookDAO.countSearchedBook(search);
+	}
+	
+	@Override
+	public void purchaseInsertForm(PurchaseVO pvo) throws Exception {
+		bookDAO.purchaseInsertForm(pvo);
 	}
 
 }

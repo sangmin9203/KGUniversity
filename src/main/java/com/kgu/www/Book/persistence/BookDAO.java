@@ -5,6 +5,7 @@ import java.util.List;
 import com.kgu.www.Book.paging.Search;
 import com.kgu.www.Book.paging.SupPaging;
 import com.kgu.www.Book.vo.BookVO;
+import com.kgu.www.Book.vo.PurchaseVO;
 
 
 
@@ -29,6 +30,9 @@ public interface BookDAO {
 	
 	int countSearchedBook(Search search) throws Exception;
 	
+	void purchaseInsertForm(PurchaseVO pvo) throws Exception;
+	
+	List<PurchaseVO> purchaseAll(PurchaseVO pvo) throws Exception;
 	
 	
 	

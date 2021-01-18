@@ -5,6 +5,7 @@ import java.util.List;
 import com.kgu.www.Book.paging.Search;
 import com.kgu.www.Book.paging.SupPaging;
 import com.kgu.www.Book.vo.BookVO;
+import com.kgu.www.Book.vo.PurchaseVO;
 
 public interface BookService {
 	
@@ -27,5 +28,8 @@ public interface BookService {
 	List<BookVO> searchBook(Search search) throws Exception;
 	
 	int countSearchedBook(Search search) throws Exception;
+	
+	void purchaseInsertForm(PurchaseVO pvo) throws Exception;
+	
 	
 }

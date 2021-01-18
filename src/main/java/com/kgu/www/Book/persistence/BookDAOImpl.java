@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.kgu.www.Book.paging.Search;
 import com.kgu.www.Book.paging.SupPaging;
 import com.kgu.www.Book.vo.BookVO;
+import com.kgu.www.Book.vo.PurchaseVO;
 
 @Repository
 public class BookDAOImpl implements BookDAO {
@@ -72,7 +73,16 @@ public class BookDAOImpl implements BookDAO {
 	public int countSearchedBook(Search search) throws Exception {
 		return sqlSession.selectOne(NAMESPACE+".countSearchedBook", search);
 	}
+	
+	@Override
+	public void purchaseInsertForm(PurchaseVO pvo) throws Exception {
+		sqlSession.insert(NAMESPACE+".purchaseInsertForm", pvo);
+	}
 
+	@Override
+	public List<PurchaseVO> purchaseAll(PurchaseVO pvo) throws Exception{
+		return sqlSession.selectList(NAMESPACE+".purchaseAll", pvo);
+	}
 
 
 
