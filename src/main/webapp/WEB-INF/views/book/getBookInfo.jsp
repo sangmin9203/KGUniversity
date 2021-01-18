@@ -37,10 +37,14 @@ ${bvo.book_price}<br>
 
 <% int admin = 0;
 	if (admin == 1){ %>
+	<form action ="${path}/book/bookAll.do?page=${supPaging.page}&perPageNum=${supPaging.perPageNum}">
 	<button type = "button" onclick = "history.go(-1)">목록</button>
+	</form>
 <% } else if (admin == 0) { %>
 	<!-- 관리자 로그인시 보여야할 버튼 -->
+	<form action ="${path}/book/bookAll.do?page=${supPaging.page}&perPageNum=${supPaging.perPageNum}">
 	<button type = "button" onclick = "history.go(-1)">목록</button>
+	</form>
 	<form action ="${path}/book/updateBook.do" method = "GET">
 		<input  type = "hidden" name = "book_name" value ="${bvo.book_name}">
 		<input  type = "hidden" name = "page" value ="${supPaging.page}">

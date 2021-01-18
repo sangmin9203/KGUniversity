@@ -173,12 +173,6 @@ public class BookController {
 		int book_amount = Integer.parseInt(hashMap.get("purchase_amount"));
 		int book_inventory = book__tamount - book_amount;
 		int book_num = bvo.getBook_num();
-		System.out.println(book_num);
-		System.out.println(user_id);
-		System.out.println(bvo.getBook_name());
-		System.out.println(book__tamount);
-		System.out.println(book_amount);
-		System.out.println(book_inventory);
 		PurchaseVO pvo = new PurchaseVO(user_id, book_name, book_amount);
 		bookService.purchaseInsertForm(pvo);
 		BookVO inventory = new BookVO(book_num, book_inventory);
