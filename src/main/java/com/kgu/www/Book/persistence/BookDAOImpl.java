@@ -85,8 +85,8 @@ public class BookDAOImpl implements BookDAO {
 	}
 
 	@Override
-	public List<PurchaseVO> purchaseList(PurchaseVO pvo) throws Exception{
-		return sqlSession.selectList(NAMESPACE+".purchaseList", pvo);
+	public List<PurchaseVO> purchaseList(String user_id) throws Exception{
+		return sqlSession.selectList(NAMESPACE+".purchaseList", user_id);
 	}
 
 

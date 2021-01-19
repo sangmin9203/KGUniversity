@@ -11,8 +11,11 @@
 <title>책 상세내용</title>
 </head>
 <body>
-<img src ="<spring:url value='/resources/img/${bvo.book_picture}'/>"><br>
-${bvo.book_name}<br>
+<c:forEach items = "${pvo}" var = "purchase">
+<img src ="<spring:url value='/resources/img/${purchase.book_picture}'/>"><br>
+${purchase.book_name}<br>
 ${purchase.book_amount}<br>
+${purchase.purchase_date}<br>
+</c:forEach>
 </body>
 </html>

@@ -83,8 +83,8 @@ public class BookServiceImpl implements BookService {
 	}
 	
 	@Override
-	public List<PurchaseVO> purchaseList(PurchaseVO pvo) throws Exception{
-		return bookDAO.purchaseList(pvo);
+	public List<PurchaseVO> purchaseList(String user_id) throws Exception{
+		return bookDAO.purchaseList(user_id);
 	}
 
 }

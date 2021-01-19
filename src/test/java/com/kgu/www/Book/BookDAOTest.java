@@ -100,4 +100,14 @@ public class BookDAOTest {
 		logger.info("=====================");
 		logger.info("searched book count" + bdao.countSearchedBook(search));
 	}*/
+	
+	@Test
+	public void getPurcahseInfo() throws Exception {
+		String user_id = "user_id";
+		List<PurchaseVO> list = bdao.purchaseList(user_id);
+		
+		for(PurchaseVO pvo : list) {
+			logger.info("msg", pvo.getPurchase_num());//
+		}
+	}
 }

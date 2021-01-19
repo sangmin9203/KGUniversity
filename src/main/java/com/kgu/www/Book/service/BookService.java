@@ -33,7 +33,7 @@ public interface BookService {
 	
 	void purchaseInsertForm(PurchaseVO pvo) throws Exception;
 	
-	List<PurchaseVO> purchaseList(PurchaseVO pvo) throws Exception;
+	List<PurchaseVO> purchaseList(String user_id) throws Exception;
 	
 	
 }

@@ -30,14 +30,14 @@
 	<br><br>
 	
 	<c:if test="${pageMaker.prev}">
-		<li><a href="${path}/book/bookAll.do?page=${pageMaker.startPage-1}">이전</a></li>
+		<a href="${path}/book/bookAll.do?page=${pageMaker.startPage-1}">이전</a>
      </c:if>
 	 <c:forEach begin="${pageMaker.startPage}" end ="${pageMaker.endPage}" var ="idx">
-		<li <c:out value ="${pageMaker.supPaging.page == idx ? '' : ''}"/>>
-		<a href="${path}/book/bookAll.do${pageMaker.makeQuery(idx)}">${idx}</a></li>
+		<c:out value ="${pageMaker.supPaging.page == idx ? '' : ''}"/>
+		<a href="${path}/book/bookAll.do${pageMaker.makeQuery(idx)}">${idx}</a>
 	</c:forEach>
 	<c:if test="${pageMaker.next && pageMaker.endPage >0}">
-		<li><a href ="${path}/book/bookAll.do?page=${pageMaker.endPage+1}">다음</a></li>
+		<a href ="${path}/book/bookAll.do?page=${pageMaker.endPage+1}">다음</a>
 	</c:if>
 </body>
 </html>

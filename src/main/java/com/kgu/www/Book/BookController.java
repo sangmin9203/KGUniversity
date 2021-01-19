@@ -1,7 +1,10 @@
 package com.kgu.www.Book;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
+
 import java.io.File;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -166,27 +169,31 @@ public class BookController {
 	//구입 처리
 	@RequestMapping(value = "/purchase.do", method = RequestMethod.POST)
 	public String purchaseInsertForm(@RequestParam HashMap<String,String> hashMap,
-			@ModelAttribute("bvo") BookVO bvo, Model model) throws Exception {
+			@ModelAttribute("bvo") BookVO bvo,SupPaging supPaging, Model model) throws Exception {
 		String user_id = hashMap.get("user_id");
 		String book_name = bvo.getBook_name();
+		String book_picture = bvo.getBook_picture();
 		int book__tamount = bvo.getBook_inventory();
 		int book_amount = Integer.parseInt(hashMap.get("purchase_amount"));
 		int book_inventory = book__tamount - book_amount;
 		int book_num = bvo.getBook_num();
-		PurchaseVO pvo = new PurchaseVO(user_id, book_name, book_amount);
+		PurchaseVO pvo = new PurchaseVO(user_id, book_picture, book_name, book_amount);
 		bookService.purchaseInsertForm(pvo);
 		BookVO inventory = new BookVO(book_num, book_inventory);
 		bookService.updateInventory(inventory);
-		model.addAttribute("pvo", pvo);
-		model.addAttribute("bvo", bookService.getBookInfo(bvo));
-		return "redirect:/book/purchaseList.do";
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setSupPaging(supPaging);
+		pageMaker.setTotalCount(bookService.countBook(supPaging));
+		model.addAttribute("supPaging", bookService.supPaging(supPaging));
+		model.addAttribute("pageMaker", pageMaker);
+		return "/book/bookAll";
 	}
 	
 	@RequestMapping(value = "/purchaseList.do", method = RequestMethod.GET)
-	public String getPurchaseInfo(@ModelAttribute("pvo") PurchaseVO pvo,@ModelAttribute("bvo") BookVO bvo, Model model) throws Exception {
-		
-		/*model.addAttribute("pvo", bookService.purchaseList(pvo));
-		model.addAttribute("bvo", bookService.getBookInfo(bvo));*/
+	public String getPurchaseInfo(@ModelAttribute("pvo") PurchaseVO pvo, Model model) throws Exception {
+			String user_id = "user_id";
+		/*bookService.getBookInfo(bvo)*/
+		model.addAttribute("pvo", bookService.purchaseList(user_id));
 		return "/book/purchaseList";
 	}
 }
