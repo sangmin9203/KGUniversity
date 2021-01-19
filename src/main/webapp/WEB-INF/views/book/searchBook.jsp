@@ -20,6 +20,7 @@
 <input type = "keyword" name = 'keyword' value = "${search.keyword}">
 <input type = "submit" value = "검색">
 </form><br>
+
 	<c:forEach items = "${book}" var = "List" >
 		<img src ="<spring:url value='/resources/img/${List.book_picture}'/>"><br>
 		<a href="${path}/book/getBookInfo.do${pageMaker.makeSearch(pageMaker.supPaging.page)}&book_name=${List.book_name}">${List.book_name}</a><br>
@@ -30,14 +31,14 @@
 	<br><br>
 	
 	<c:if test="${pageMaker.prev}">
-		<li><a href="${path}/book/search.do${pageMaker.makeSearch(pageMaker.startPage-1)}">이전</a></li>
+		<a href="${path}/book/search.do${pageMaker.makeSearch(pageMaker.startPage-1)}">이전</a>
      </c:if>
 	 <c:forEach begin="${pageMaker.startPage}" end ="${pageMaker.endPage}" var ="idx">
-		<li <c:out value ="${pageMaker.supPaging.page == idx ? '' : ''}"/>>
-		<a href="${path}/book/search.do${pageMaker.makeSearch(idx)}">${idx}</a></li>
+		<c:out value ="${pageMaker.supPaging.page == idx ? '' : ''}"/>
+		<a href="${path}/book/search.do${pageMaker.makeSearch(idx)}">${idx}</a>
 	</c:forEach>
 	<c:if test="${pageMaker.next && pageMaker.endPage >0}">
-		<li><a href ="${path}/book/search.do${pageMaker.makeSearch(pageMaker.endPage+1)}">다음</a></li>
+		<a href ="${path}/book/search.do${pageMaker.makeSearch(pageMaker.endPage+1)}">다음</a>
 	</c:if>
 </body>
 </html>

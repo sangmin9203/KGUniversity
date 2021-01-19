@@ -7,8 +7,10 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.kgu.www.Book.paging.PurPaging;
 import com.kgu.www.Book.paging.Search;
 import com.kgu.www.Book.paging.SupPaging;
+import com.kgu.www.Book.paging.UserPurchase;
 import com.kgu.www.Book.vo.BookVO;
 import com.kgu.www.Book.vo.PurchaseVO;
 
@@ -70,6 +72,16 @@ public class BookDAOImpl implements BookDAO {
 	}
 	
 	@Override
+	public List<PurchaseVO> purPaging(PurPaging purPaging) throws Exception {
+		return sqlSession.selectList(NAMESPACE+".purPaging", purPaging);
+	}
+	
+	@Override
+	public int countPurchase(PurPaging purPaging) throws Exception {
+		return sqlSession.selectOne(NAMESPACE+".countBook", purPaging);
+	}
+	
+	@Override
 	public List<BookVO> searchBook(Search search) throws Exception {
 		return sqlSession.selectList(NAMESPACE+".searchBook", search);
 	}
@@ -88,10 +100,16 @@ public class BookDAOImpl implements BookDAO {
 	public List<PurchaseVO> purchaseList(String user_id) throws Exception{
 		return sqlSession.selectList(NAMESPACE+".purchaseList", user_id);
 	}
-
-
-
-
+	
+	@Override
+	public List<PurchaseVO>	userPurchase(UserPurchase userPurchase) throws Exception {
+		return sqlSession.selectList(NAMESPACE+".userPurchase", userPurchase);
+	}
+	
+	@Override
+	public int countSearchedPurchase(UserPurchase userPurchase) throws Exception {
+		return sqlSession.selectOne(NAMESPACE+".countSearchedPurchase", userPurchase);
+	}
 
 
 }

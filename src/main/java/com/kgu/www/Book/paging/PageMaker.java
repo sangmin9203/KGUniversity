@@ -16,14 +16,24 @@ public class PageMaker {
 	private int displayPageNum = 10; //하단 페이지의 번호 갯수
 	
 	private SupPaging supPaging;
+	private PurPaging purPaging;
 	
 	public void setSupPaging(SupPaging supPaging) {
 		this.supPaging = supPaging;
 	}
 	
+	public void setPurPaging(PurPaging purPaging) {
+		this.purPaging = purPaging;
+	}
+	
 	public void setTotalCount(int totalCount) {
 		this.totalCount = totalCount;
 		calcData();
+	}
+	
+	public void setTotalCountP(int totalCount) {
+		this.totalCount = totalCount;
+		calcData2();
 	}
 	
 	 private void calcData() {
@@ -43,6 +53,24 @@ public class PageMaker {
 	        next = endPage * supPaging.getPerPageNum() >= totalCount ? false : true;
 
 	    }
+	 	
+	 private void calcData2() {
+		 
+		 endPage = (int) (Math.ceil(purPaging.getPage() / (double) displayPageNum) * displayPageNum);
+		 
+		 startPage = (endPage - displayPageNum) + 1;
+		 
+		 int tempEndPage = (int) (Math.ceil(totalCount / (double) purPaging.getPerPageNum()));
+		 
+		 if (endPage > tempEndPage) {
+			 endPage = tempEndPage;
+		 }
+		 
+		 prev = startPage == 1 ? false : true;
+		 
+		 next = endPage * purPaging.getPerPageNum() >= totalCount ? false : true;
+		 
+	 }
 
 	public int getStartPage() {
 		return startPage;
@@ -92,10 +120,23 @@ public class PageMaker {
 		return supPaging;
 	}
 	
+	public PurPaging getPurPaging() {
+		return purPaging;
+	}
+	
 	public String makeQuery(int page) {
 		UriComponents uri = UriComponentsBuilder.newInstance()
 				.queryParam("page", page)
 				.queryParam("perPageNum", supPaging.getPerPageNum())
+				.build();
+		return uri.toUriString();
+	}
+	
+	public String makeQueryP(int page) {
+		UriComponents uri = UriComponentsBuilder.newInstance()
+				.queryParam("page", page)
+				.queryParam("perPageNum", purPaging.getPerPageNum())
+				.queryParam("user_id", ((UserPurchase) purPaging).getUser_id())
 				.build();
 		return uri.toUriString();
 	}

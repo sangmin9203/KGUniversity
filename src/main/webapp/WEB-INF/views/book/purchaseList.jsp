@@ -17,5 +17,26 @@ ${purchase.book_name}<br>
 ${purchase.book_amount}<br>
 ${purchase.purchase_date}<br>
 </c:forEach>
+
+<br><br>
+	
+	<c:if test="${pageMaker.prev}">
+		<a href="${path}/book/purchaseList.do${pageMaker.makeQueryP(pageMaker.startPage-1)}">이전</a>
+     </c:if>
+	 <c:forEach begin="${pageMaker.startPage}" end ="${pageMaker.endPage}" var ="idx">
+		<c:out value ="${pageMaker.purPaging.page == idx ? '' : ''}"/>
+		<a href="${path}/book/purchaseList.do${pageMaker.makeQueryP(idx)}">${idx}</a>
+	</c:forEach>
+	<c:if test="${pageMaker.next && pageMaker.endPage >0}">
+		<a href ="${path}/book/purchaseList.do${pageMaker.makeQueryP(pageMaker.endPage+1)}">다음</a>
+	</c:if>
+	<%-- <c:forEach begin="${pageMaker.startPage}" end ="${pageMaker.endPage}" var ="idx">
+		<li <c:out value ="${pageMaker.supPaging.page == idx ? '' : ''}"/>>
+		<a href="${path}/book/search.do${pageMaker.makeSearch(idx)}">${idx}</a></li>
+	</c:forEach>
+	<c:if test="${pageMaker.next && pageMaker.endPage >0}">
+		<li><a href ="${path}/book/search.do${pageMaker.makeSearch(pageMaker.endPage+1)}">다음</a></li>
+	</c:if> --%>
+	
 </body>
 </html>

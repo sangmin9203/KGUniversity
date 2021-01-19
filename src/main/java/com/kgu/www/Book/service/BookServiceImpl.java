@@ -6,8 +6,10 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.kgu.www.Book.paging.PurPaging;
 import com.kgu.www.Book.paging.Search;
 import com.kgu.www.Book.paging.SupPaging;
+import com.kgu.www.Book.paging.UserPurchase;
 import com.kgu.www.Book.persistence.BookDAO;
 import com.kgu.www.Book.vo.BookVO;
 import com.kgu.www.Book.vo.PurchaseVO;
@@ -85,6 +87,26 @@ public class BookServiceImpl implements BookService {
 	@Override
 	public List<PurchaseVO> purchaseList(String user_id) throws Exception{
 		return bookDAO.purchaseList(user_id);
+	}
+	
+	@Override
+	public List<PurchaseVO> purPaging(PurPaging purPaging) throws Exception {
+		return bookDAO.purPaging(purPaging);
+	}
+	
+	@Override
+	public int countPurchase(PurPaging purPaging) throws Exception {
+		return bookDAO.countPurchase(purPaging);
+	}
+	
+	@Override
+	public List<PurchaseVO> userPurchase(UserPurchase userPurchase) throws Exception {
+		return bookDAO.userPurchase(userPurchase);
+	}
+	
+	@Override
+	public int countSearchedPurchase(UserPurchase userPurchase) throws Exception {
+		return bookDAO.countSearchedPurchase(userPurchase);
 	}
 
 }

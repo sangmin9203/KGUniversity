@@ -142,8 +142,33 @@
 <select id = "countPurchase" resultType = "int">
 	<![CDATA[
 		SELECT COUNT(purchase_num)
-		FROM book
+		FROM book_purchase
 		WHERE purchase_num>0
+	]]>
+</select>
+
+<select id="userPurchase" resultType = "PurchaseVO">
+		SELECT * FROM (
+    				SELECT b.*, ROW_NUMBER() OVER(ORDER BY purchase_num DESC) AS RNUM
+    				FROM book_purchase b
+    				WHERE purchase_num > 0 AND user_id = #{user_id}
+						)
+		WHERE RNUM BETWEEN
+		<choose>
+			<when test="pageStart == 0">
+				#{pageStart} AND #{pageStart}+#{perPageNum}
+			</when>
+			<otherwise>
+				#{pageStart}+1 AND #{pageStart}+#{perPageNum}
+			</otherwise>
+		</choose>
+</select>
+
+<select id = "countSearchedPurchase" resultType = "int">
+	<![CDATA[
+		SELECT COUNT(purchase_num)
+		FROM book_purchase
+		WHERE purchase_num > 0 AND user_id = #{user_id}
 	]]>
 </select>
 

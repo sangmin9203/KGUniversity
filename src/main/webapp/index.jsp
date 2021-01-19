@@ -15,7 +15,7 @@
 	<h2>mainScreen.jsp</h2>
 	
 	<script>
-		location.href="${path}/book/purchaseList.do"
+		location.href="${path}/book/bookAll.do"
 	</script>
 
 </body>

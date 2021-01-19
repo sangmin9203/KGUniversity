@@ -14,6 +14,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.kgu.www.Book.paging.Search;
 import com.kgu.www.Book.paging.SupPaging;
+import com.kgu.www.Book.paging.UserPurchase;
 import com.kgu.www.Book.persistence.BookDAO;
 import com.kgu.www.Book.vo.BookVO;
 import com.kgu.www.Book.vo.PurchaseVO;
@@ -101,7 +102,7 @@ public class BookDAOTest {
 		logger.info("searched book count" + bdao.countSearchedBook(search));
 	}*/
 	
-	@Test
+	/*@Test
 	public void getPurcahseInfo() throws Exception {
 		String user_id = "user_id";
 		List<PurchaseVO> list = bdao.purchaseList(user_id);
@@ -109,5 +110,22 @@ public class BookDAOTest {
 		for(PurchaseVO pvo : list) {
 			logger.info("msg", pvo.getPurchase_num());//
 		}
+	}*/
+	
+	@Test //유저 구매 목록 페이징처리
+	public void searchPurchase() throws Exception {
+		UserPurchase up = new UserPurchase();
+		String user_id = "ysm9203";
+		up.setUser_id(user_id);
+		
+		logger.info("===================");
+		List<PurchaseVO> pvo = bdao.userPurchase(up);
+		
+		for(PurchaseVO list : pvo) {
+			logger.info(list.getBook_name());
+		}
+		
+		logger.info("=====================");
+		logger.info("searched book count" + bdao.countSearchedPurchase(up));
 	}
 }

@@ -1,10 +1,7 @@
 package com.kgu.www.Book;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
-
 import java.io.File;
 import java.util.HashMap;
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -20,8 +17,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kgu.www.Book.paging.PageMaker;
+import com.kgu.www.Book.paging.PurPaging;
 import com.kgu.www.Book.paging.Search;
 import com.kgu.www.Book.paging.SupPaging;
+import com.kgu.www.Book.paging.UserPurchase;
 import com.kgu.www.Book.service.BookService;
 import com.kgu.www.Book.vo.BookVO;
 import com.kgu.www.Book.vo.PurchaseVO;
@@ -48,13 +47,16 @@ public class BookController {
 	
 	//등록 처리
 	@RequestMapping(value = "/bookInsertForm.do", method = RequestMethod.POST)
-	public String bookInsertFormPOST(@RequestParam("book_file") MultipartFile book_file, @RequestParam HashMap<String,String> hashMap, RedirectAttributes rda)
+	public String bookInsertFormPOST(@RequestParam(value = "book_file", required = false) MultipartFile book_file, @RequestParam HashMap<String,String> hashMap, RedirectAttributes rda)
 			throws Exception {
 		logger.info("등록...");
-		String savepoint ="C:\\Users\\pc\\Desktop\\KG_University\\src\\main\\webapp\\WEB-INF\\img";
-		File save = new File(savepoint,book_file.getOriginalFilename());
-		book_file.transferTo(save);
-		String book_picture = book_file.getOriginalFilename();
+		String book_picture = "";
+		if(!book_file.isEmpty()) {
+			book_picture = book_file.getOriginalFilename();
+			String savepoint ="C:\\Users\\pc\\Desktop\\KG_University\\src\\main\\webapp\\resources\\img";
+			File save = new File(savepoint,book_file.getOriginalFilename());
+			book_file.transferTo(save);
+		}
 		String book_name = (String) hashMap.get("book_name");
 		String book_writer = (String) hashMap.get("book_writer");
 		int book_price = (int) Integer.parseInt(hashMap.get("book_price"));
@@ -190,10 +192,14 @@ public class BookController {
 	}
 	
 	@RequestMapping(value = "/purchaseList.do", method = RequestMethod.GET)
-	public String getPurchaseInfo(@ModelAttribute("pvo") PurchaseVO pvo, Model model) throws Exception {
+	public String userPurchase(@ModelAttribute("userPurchase")UserPurchase userPurchase, PurPaging purPaging, Model model) throws Exception {
 			String user_id = "user_id";
-		/*bookService.getBookInfo(bvo)*/
-		model.addAttribute("pvo", bookService.purchaseList(user_id));
+			userPurchase.setUser_id(user_id);
+			PageMaker pageMaker = new PageMaker();
+			pageMaker.setPurPaging(userPurchase);
+			pageMaker.setTotalCountP(bookService.countSearchedPurchase(userPurchase));
+			model.addAttribute("pageMaker", pageMaker);
+			model.addAttribute("pvo", bookService.userPurchase(userPurchase));
 		return "/book/purchaseList";
 	}
 }
