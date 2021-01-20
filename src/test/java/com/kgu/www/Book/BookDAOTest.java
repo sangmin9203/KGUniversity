@@ -33,7 +33,7 @@ public class BookDAOTest {
 	/*@Test
 	public void testCreate() throws Exception {
 		BookVO bvo = new BookVO();
-		for(int i = 101; i<=1000; i++) {
+		for(int i = 1; i<=1000; i++) {
 		bvo.setBook_picture(i+"번째글");
 		bvo.setBook_name(i+"번째글");
 		bvo.setBook_writer("글쓴이");
