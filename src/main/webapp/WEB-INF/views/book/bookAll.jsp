@@ -8,10 +8,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/litera/bootstrap.min.css" integrity="sha384-enpDwFISL6M3ZGZ50Tjo8m65q06uLVnyvkFO3rsoW0UC15ATBFz3QEhr3hmxpYsn" crossorigin="anonymous">
+<meta name="viewport" content = "width-device-width", initail-scale="1">
 <meta charset="UTF-8">
 <title>책 판매 목록</title>
 </head>
 <body>
+<jsp:include page="../include/header.jsp"/>
+<br><br><br>
 <form action = "search.do" method="get">
 <select name = "searchType" id = "searchType">
 	<option value = "book_name" <c:out value = "${search.searchType eq 'book_title' ? 'selected' : ''}"/>>책 제목</option>
