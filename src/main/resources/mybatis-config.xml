@@ -4,7 +4,21 @@
 
 <configuration>
 	<typeAliases>
-		<typeAlias alias="testVO" type="com.kgu.www.vo.TestVO"/>
-		<typeAlias alias="BookVO" type="com.kgu.www.vo.BookVO"/>
+		<!-- 2021.01.20 권태영 -->
+		<typeAlias alias="freeBoardVO" type="com.kgu.www.vo.FreeBoardVO"/>
+		<typeAlias alias="boardPagingVO" type="com.kgu.www.vo.BoardPagingVO"/>
+		<typeAlias alias="boardCommentVO" type="com.kgu.www.vo.BoardCommentVO"/>
+		<!-- 2021.01.20 권태영-end -->
+
+		<!-- 2021.01.20 김가희 -->
+		<typeAlias alias="memberVO" type="com.kgu.www.vo.MemberVO"/>
+		<!-- 2021.01.20 김가희-end -->
+		
+		<!-- 2021.01.20 윤상민 -->
+		<typeAlias alias = "BookVO" type="com.kgu.www.Book.vo.BookVO"/>
+		<typeAlias alias = "UpdateVO" type="com.kgu.www.Book.vo.BookVO"/>
+		<typeAlias alias = "PurchaseVO" type="com.kgu.www.Book.vo.PurchaseVO"/>
+		<!-- 2021.01.20 윤상민-end -->
+		
 	</typeAliases>
 </configuration>
