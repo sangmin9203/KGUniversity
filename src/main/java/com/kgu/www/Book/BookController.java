@@ -191,6 +191,7 @@ public class BookController {
 		return "/book/bookAll";
 	}
 	
+	//전체 구매 목록
 	@RequestMapping(value = "/purchaseList.do", method = RequestMethod.GET)
 	public String PurchaseAll(@RequestParam("user_id") String user_id, @ModelAttribute("userPurchase")UserPurchase userPurchase, PurPaging purPaging, Model model) throws Exception {
 				System.out.println(user_id);
@@ -204,6 +205,7 @@ public class BookController {
 		return "/book/purchaseList";
 	}
 	
+	//유저가 구매한 책 목록
 	@RequestMapping(value = "/userPurchase.do", method = RequestMethod.GET)
 	public String userPurchase(@RequestParam("user_id") String user_id, @ModelAttribute("userPurchase")UserPurchase userPurchase, PurPaging purPaging, Model model) throws Exception {
 			System.out.println(user_id);
