@@ -192,14 +192,27 @@ public class BookController {
 	}
 	
 	@RequestMapping(value = "/purchaseList.do", method = RequestMethod.GET)
-	public String userPurchase(@ModelAttribute("userPurchase")UserPurchase userPurchase, PurPaging purPaging, Model model) throws Exception {
-			String user_id = "user_id";
+	public String PurchaseAll(@RequestParam("user_id") String user_id, @ModelAttribute("userPurchase")UserPurchase userPurchase, PurPaging purPaging, Model model) throws Exception {
+				System.out.println(user_id);
+				userPurchase.setUser_id(user_id);
+				PageMaker pageMaker = new PageMaker();
+				pageMaker.setPurPaging(purPaging);
+				pageMaker.setTotalCountP(bookService.countPurchase(purPaging));
+				model.addAttribute("pageMaker", pageMaker);
+				model.addAttribute("pvo", bookService.purPaging(purPaging));
+				model.addAttribute("user_id", user_id);
+		return "/book/purchaseList";
+	}
+	
+	@RequestMapping(value = "/userPurchase.do", method = RequestMethod.GET)
+	public String userPurchase(@RequestParam("user_id") String user_id, @ModelAttribute("userPurchase")UserPurchase userPurchase, PurPaging purPaging, Model model) throws Exception {
+			System.out.println(user_id);
 			userPurchase.setUser_id(user_id);
 			PageMaker pageMaker = new PageMaker();
 			pageMaker.setPurPaging(userPurchase);
 			pageMaker.setTotalCountP(bookService.countSearchedPurchase(userPurchase));
 			model.addAttribute("pageMaker", pageMaker);
 			model.addAttribute("pvo", bookService.userPurchase(userPurchase));
-		return "/book/purchaseList";
+		return "/book/userPurchase";
 	}
 }

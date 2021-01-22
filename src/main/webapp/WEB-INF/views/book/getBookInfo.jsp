@@ -16,7 +16,7 @@ ${bvo.book_name}<br>
 ${bvo.book_writer}<br>
 ${bvo.book_price}<br>
 	<form action = "${path}/book/purchase.do" method = "POST">
-			<input type = "hidden" name = "user_id" value = "user_id">
+			<input type = "hidden" name = "user_id" value = "ysm9203">
 			<input type = "hidden" name = "book_num" value = "${bvo.book_num}">
 			<input type = "hidden" name = "book_picture" value = "${bvo.book_picture}">
 			<input type = "hidden" name = "book_name" value = "${bvo.book_name}">
