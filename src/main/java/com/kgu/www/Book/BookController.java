@@ -214,5 +214,6 @@ public class BookController {
 			model.addAttribute("pageMaker", pageMaker);
 			model.addAttribute("pvo", bookService.userPurchase(userPurchase));
 		return "/book/userPurchase";
+		
 	}
 }
