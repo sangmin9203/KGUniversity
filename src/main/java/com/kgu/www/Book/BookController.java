@@ -193,14 +193,12 @@ public class BookController {
 	
 	//전체 구매 목록
 	@RequestMapping(value = "/purchaseList.do", method = RequestMethod.GET)
-	public String PurchaseAll(@RequestParam("user_id") String user_id, PurPaging purPaging, Model model) throws Exception {
-				System.out.println(user_id);
+	public String PurchaseAll(PurPaging purPaging, Model model) throws Exception {
 				PageMaker pageMaker = new PageMaker();
 				pageMaker.setPurPaging(purPaging);
 				pageMaker.setTotalCountP(bookService.countPurchase(purPaging));
 				model.addAttribute("pageMaker", pageMaker);
 				model.addAttribute("pvo", bookService.purPaging(purPaging));
-				model.addAttribute("user_id", user_id);
 		return "/book/purchaseList";
 	}
 	

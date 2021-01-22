@@ -14,7 +14,7 @@
 <body>
 
 <form action = "purchaseList.do" methode = "get">
-	<input type="hidden" name = "user_id" value = "ysm9203">
+	<input type="hidden" name = "user_id" value = "user_id">
 	<input type="submit" value="구입목록">
 </form>
 
