@@ -118,9 +118,9 @@ div.book1 a {
 						
 						<p class="card-text">
 							<font style="vertical-align: inherit;">
-							<font style="vertical-align: inherit;"><pre>
-							 <c:out value="${bvo.book_info}"/>
-							</pre></font></font>
+							<font style="vertical-align: inherit;">
+							<pre style = "overflow : auto; max-height : 300px;"><c:out value="${bvo.book_info}"/></pre>
+							</font></font>
 						</p>
 					</div>
 				</li>
@@ -136,7 +136,7 @@ div.book1 a {
 						<p class="card-text">
 							<font style="vertical-align: inherit;"> 
 							<font style="vertical-align: inherit;">
-							<pre><c:out value="${bvo.book_mokcha}"/></pre>
+							<pre style = "overflow : auto; max-height : 300px;"><c:out value="${bvo.book_mokcha}"/></pre>
 							</font></font>
 						</p>
 					</div>

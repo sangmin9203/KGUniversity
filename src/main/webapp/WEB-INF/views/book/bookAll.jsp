@@ -13,7 +13,7 @@
 </head>
 <body>
 
-<form action = "purchaseList.do" methode = "get">
+<form action = "userPurchase.do" methode = "get">
 	<input type="hidden" name = "user_id" value = "user_id">
 	<input type="submit" value="구입목록">
 </form>
