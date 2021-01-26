@@ -4,11 +4,13 @@ import java.io.File;
 import java.util.HashMap;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,6 +34,7 @@ public class BookController {
 	private static final Logger logger = LoggerFactory.getLogger(BookController.class);
 	
 	private final BookService bookService;
+	private String savepoint ="C:\\Users\\pc\\Desktop\\KGUniversity\\src\\main\\webapp\\resources\\img";
 	
 	@Inject
 	public BookController(BookService bookService) {
@@ -53,7 +56,6 @@ public class BookController {
 		String book_picture = "";
 		if(!book_file.isEmpty()) {
 			book_picture = book_file.getOriginalFilename();
-			String savepoint ="C:\\Users\\pc\\Desktop\\KG_University\\src\\main\\webapp\\resources\\img";
 			File save = new File(savepoint,book_file.getOriginalFilename());
 			book_file.transferTo(save);
 		}
@@ -80,7 +82,6 @@ public class BookController {
 		pageMaker.setTotalCount(bookService.countBook(supPaging));
 		model.addAttribute("supPaging", bookService.supPaging(supPaging));
 		model.addAttribute("pageMaker", pageMaker);
-		
 		return "/book/bookAll";
 	}
 	
@@ -108,7 +109,6 @@ public class BookController {
 			, @ModelAttribute("bvo") BookVO bvo,SupPaging supPaging) throws Exception {
 		logger.info("수정처리..");
 		String book_picture = "";
-		String savepoint ="C:\\Users\\pc\\Desktop\\KG_University\\src\\main\\webapp\\resources\\img";
 		int book_num = (int) Integer.parseInt(hashMap.get("book_num"));
 		System.out.println();
 		BookVO bvo2 = bookService.getBookInfoN(book_num);
@@ -127,6 +127,7 @@ public class BookController {
 		}
 		System.out.println(book_picture);
 		String book_name = (String) hashMap.get("book_name");
+		System.out.println(book_name);
 		String book_writer = (String) hashMap.get("book_writer");
 		int book_price = (int) Integer.parseInt(hashMap.get("book_price"));
 		String book_info = (String) hashMap.get("book_info");
@@ -169,71 +170,69 @@ public class BookController {
 	}
 	
 	//결제 처리
-		@RequestMapping(value = "/kakao.do", method = RequestMethod.GET)
-		public String kakao(@RequestParam HashMap<String,String> hashMap, Model model, @ModelAttribute("bvo") BookVO bvo) {
-			int book_num = bvo.getBook_num();
-			String user_id = hashMap.get("user_id");
-			String book_name = bvo.getBook_name();
-			String book_picture = bvo.getBook_picture();
-			int book_inventory = bvo.getBook_inventory();
-			int purchase_amount = Integer.parseInt(hashMap.get("purchase_amount"));
-			int book_price = bvo.getBook_price();
-			model.addAttribute("user_id", user_id);
-			model.addAttribute("book_num", book_num);
-			model.addAttribute("book_name", book_name);
-			model.addAttribute("book_picture", book_picture);
-			model.addAttribute("purchase_amount", purchase_amount);
-			model.addAttribute("book_inventory", book_inventory);
-			model.addAttribute("book_price", book_price);
-			logger.info("결제 처리...");
-			return "/book/kakao";
-		}
-		
-		//구입 처리
-		@RequestMapping(value = "/purchase.do", method = RequestMethod.GET)
-		public String purchaseInsertForm(@RequestParam HashMap<String,String> hashMap,
-				@ModelAttribute("bvo") BookVO bvo,SupPaging supPaging, Model model) throws Exception {
-			String user_id = hashMap.get("user_id");
-			String book_name = bvo.getBook_name();
-			String book_picture = bvo.getBook_picture();
-			int book__tamount = bvo.getBook_inventory();
-			int book_amount = Integer.parseInt(hashMap.get("purchase_amount"));
-			int book_inventory = book__tamount - book_amount;
-			int book_num = bvo.getBook_num();
-			PurchaseVO pvo = new PurchaseVO(user_id, book_picture, book_name, book_amount);
-			bookService.purchaseInsertForm(pvo);
-			BookVO inventory = new BookVO(book_num, book_inventory);
-			bookService.updateInventory(inventory);
-			PageMaker pageMaker = new PageMaker();
-			pageMaker.setSupPaging(supPaging);
-			pageMaker.setTotalCount(bookService.countBook(supPaging));
-			model.addAttribute("supPaging", bookService.supPaging(supPaging));
-			model.addAttribute("pageMaker", pageMaker);
-			logger.info("구입 처리...");
-			return "/book/bookAll";
-		}
-		
-		//전체 구매 목록
-		@RequestMapping(value = "/purchaseList.do", method = RequestMethod.GET)
-		public String PurchaseAll(PurPaging purPaging, Model model) throws Exception {
-					PageMaker pageMaker = new PageMaker();
-					pageMaker.setPurPaging(purPaging);
-					pageMaker.setTotalCountP(bookService.countPurchase(purPaging));
-					model.addAttribute("pageMaker", pageMaker);
-					model.addAttribute("pvo", bookService.purPaging(purPaging));
-			return "/book/purchaseList";
-		}
-		
-		//유저가 구매한 책 목록
-		@RequestMapping(value = "/userPurchase.do", method = RequestMethod.GET)
-		public String userPurchase(@RequestParam("user_id") String user_id, @ModelAttribute("userPurchase")UserPurchase userPurchase, PurPaging purPaging, Model model) throws Exception {
-				System.out.println(user_id);
-				userPurchase.setUser_id(user_id);
+	@RequestMapping(value = "/kakao.do", method = RequestMethod.GET)
+	public String kakao(@RequestParam HashMap<String,String> hashMap, Model model, @ModelAttribute("bvo") BookVO bvo, String user_id) {
+		int book_num = bvo.getBook_num();
+		String book_name = bvo.getBook_name();
+		String book_picture = bvo.getBook_picture();
+		int book_inventory = bvo.getBook_inventory();
+		int purchase_amount = Integer.parseInt(hashMap.get("purchase_amount"));
+		int book_price = bvo.getBook_price();
+		model.addAttribute("user_id", user_id);
+		model.addAttribute("book_num", book_num);
+		model.addAttribute("book_name", book_name);
+		model.addAttribute("book_picture", book_picture);
+		model.addAttribute("purchase_amount", purchase_amount);
+		model.addAttribute("book_inventory", book_inventory);
+		model.addAttribute("book_price", book_price);
+		return "/book/kakao";
+	}
+	
+	//구입 처리
+	@RequestMapping(value = "/purchase.do", method = RequestMethod.GET)
+	public String purchaseInsertForm(@RequestParam HashMap<String,String> hashMap,
+			@ModelAttribute("bvo") BookVO bvo,SupPaging supPaging, Model model, String user_id) throws Exception {
+		String book_name = bvo.getBook_name();
+		String book_picture = bvo.getBook_picture();
+		int book__tamount = bvo.getBook_inventory();
+		int book_amount = Integer.parseInt(hashMap.get("purchase_amount"));
+		int book_inventory = book__tamount - book_amount;
+		int book_num = bvo.getBook_num();
+		PurchaseVO pvo = new PurchaseVO(user_id, book_picture, book_name, book_amount);
+		bookService.purchaseInsertForm(pvo);
+		BookVO inventory = new BookVO(book_num, book_inventory);
+		bookService.updateInventory(inventory);
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setSupPaging(supPaging);
+		pageMaker.setTotalCount(bookService.countBook(supPaging));
+		model.addAttribute("supPaging", bookService.supPaging(supPaging));
+		model.addAttribute("pageMaker", pageMaker);
+		logger.info("구입 처리...");
+		return "/book/bookAll";
+	}
+	
+	//전체 구매 목록
+	@RequestMapping(value = "/purchaseList.do", method = RequestMethod.GET)
+	public String PurchaseAll(PurPaging purPaging, Model model) throws Exception {
 				PageMaker pageMaker = new PageMaker();
-				pageMaker.setPurPaging(userPurchase);
-				pageMaker.setTotalCountP(bookService.countSearchedPurchase(userPurchase));
+				pageMaker.setPurPaging(purPaging);
+				pageMaker.setTotalCountP(bookService.countPurchase(purPaging));
 				model.addAttribute("pageMaker", pageMaker);
-				model.addAttribute("pvo", bookService.userPurchase(userPurchase));
-			return "/book/userPurchase";
-		}
+				model.addAttribute("pvo", bookService.purPaging(purPaging));
+		return "/book/purchaseList";
+	}
+	
+	//유저가 구매한 책 목록
+	@RequestMapping(value = "/userPurchase.do", method = RequestMethod.GET)
+	public String userPurchase(String user_id, @ModelAttribute("userPurchase")UserPurchase userPurchase, PurPaging purPaging, Model model) throws Exception {
+			System.out.println(user_id);
+			userPurchase.setUser_id(user_id);
+			PageMaker pageMaker = new PageMaker();
+			pageMaker.setPurPaging(userPurchase);
+			pageMaker.setTotalCountP(bookService.countSearchedPurchase(userPurchase));
+			model.addAttribute("pageMaker", pageMaker);
+			model.addAttribute("pvo", bookService.userPurchase(userPurchase));
+		return "/book/userPurchase";
+	}
+	
 }

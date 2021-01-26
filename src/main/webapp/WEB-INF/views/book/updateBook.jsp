@@ -5,13 +5,20 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <c:set var="path" value ="${pageContext.request.contextPath}"/>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%
+	String user_id = (String) session.getAttribute("userId");
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>책 등록 페이지</title>
+<title>책 수정페이지</title>
 </head>
 <body>
+<jsp:include page="../include/header.jsp" />
+	<br>
+	<br>
+
 	${bvo.book_num}
 	<div class = container style="margin : auto; width:700px; align : center">
 		<form action ="${path}/book/updateBook.do" method = "post" enctype="multipart/form-data">
