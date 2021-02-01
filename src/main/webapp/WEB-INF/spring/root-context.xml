@@ -34,10 +34,12 @@
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" > 
 		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory" /> 
 	</bean>
+	<!--  2021.01.21 윤상민 -->
+	<context:component-scan base-package="com.kgu.www.Book"/>
+	<!--  2021.01.21 윤상민 end-->
 	
 	<!-- 2021.01.20 손혜지 -->
-	<!-- <context:component-scan base-package="com.kgu.www.utils"/> -->
-
+	<context:component-scan base-package="com.kgu.www.utils"/>
 	<!-- 2021.01.20 손혜지-end -->
 	
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"> 
@@ -53,8 +55,8 @@
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="smtp.gmail.com"/>
 		<property name="port" value="587"/>
-		<property name="username" value="gahee3839@gmail.com"/>
-		<property name="password" value="rkrkgml0217"/>
+		<property name="username" value="official.KGUniv@gmail.com"/>
+		<property name="password" value="itbank1111"/>
 		<property name="defaultEncoding" value="UTF-8"/>
 		<property name="javaMailProperties">
 			<props>
@@ -68,7 +70,6 @@
 	<!-- 2021.01.20 김가희-end -->
 	
 	
-	<!-- <tx:annotation-driven transaction-manager="transactionManager"/> --> 
-	<context:component-scan base-package="com.kgu.www.Book"/>
-	<context:component-scan base-package="com.kgu.www.utils"/>
+	<tx:annotation-driven transaction-manager="transactionManager"/> 
+	
 </beans>
