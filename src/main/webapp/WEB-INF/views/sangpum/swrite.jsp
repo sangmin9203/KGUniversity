@@ -40,7 +40,7 @@
 		</div>
 		<br>
         <div style="width:950px">내용<textarea name="content" id="content" rows="8" cols="80" placeholder="글 내용 입력" class="form-control-plaintext"></textarea></div>
-        <div>이름<input name="id" id="id" placeholder="이름 입력"></div>
+        <input type="hidden" name="id" value="${sessionScope.userId }">
         <div style="width:950px; text-align:center;">        
         <div class ="inputArea">
         <label for="gdsImg">이미지</label>

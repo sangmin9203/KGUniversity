@@ -31,6 +31,9 @@
 			<when test="searchType=='content'">
 				WHERE lower(content) like '%'||#{searchKeyword}||'%'
 			</when>
+			<when test="searchType=='myWrite'">
+				WHERE lower(userID) like '%'||#{searchKeyword}||'%'
+			</when>
 			<otherwise>
 				WHERE title like '%%'
 			</otherwise>
@@ -214,6 +217,9 @@
 			<when test="searchType=='content'">
 				WHERE lower(content) like '%'||#{searchKeyword}||'%'
 			</when>
+			<when test="searchType=='myWrite'">
+				WHERE lower(userID) like '%'||#{searchKeyword}||'%'
+			</when>
 			<otherwise>
 				WHERE title like '%%'
 			</otherwise>
@@ -379,6 +385,9 @@
 			</when>
 			<when test="searchType=='content'">
 				WHERE lower(content) like '%'||#{searchKeyword}||'%'
+			</when>
+			<when test="searchType=='myWrite'">
+				WHERE lower(userID) like '%'||#{searchKeyword}||'%'
 			</when>
 			<otherwise>
 				WHERE title like '%%'
@@ -546,6 +555,9 @@
 			</when>
 			<when test="searchType=='content'">
 				WHERE lower(content) like '%'||#{searchKeyword}||'%'
+			</when>
+			<when test="searchType=='myWrite'">
+				WHERE lower(userID) like '%'||#{searchKeyword}||'%'
 			</when>
 			<otherwise>
 				WHERE title like '%%'
@@ -763,6 +775,3 @@
 	<!--### 홈페이지-end ###-->
 	
 </mapper>
-
-
-
