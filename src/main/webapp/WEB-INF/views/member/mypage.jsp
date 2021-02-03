@@ -3,6 +3,9 @@
  <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="path" value ="${pageContext.request.contextPath}"/>
+<%
+	String userId = (String) session.getAttribute("userId");
+%>
 <!DOCTYPE html>
 <jsp:include page="../include/header.jsp" />
 <html>
@@ -38,6 +41,8 @@
 			<c:set var="now" value="${vo.joinDate}"></c:set>
 			<td><fmt:formatDate value="${now}" type="date"/></td>
 		</tr>
+		
+	<%if(!userId.equals("bookadmin")) { %>
 		<tr>
 			<td>책구매내역</td>
 			<td><a href="${path}/book/userPurchase.do?user_id=${vo.userId}">구매내역보기</a></td>
@@ -52,6 +57,7 @@
 				<a href="${path}/boardList?searchType=i&Keyword=${vo.userId}">학생장터</a>
 			</td>
 		</tr>
+		<%}%>
 	</table>
 	<a href="${path}/member/update.do?userId=${vo.userId}">
 		<input type="button" class="btn btn-primary" value="회원정보수정">
