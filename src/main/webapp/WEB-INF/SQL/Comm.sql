@@ -1,3 +1,4 @@
+ drop table comm cascade constraints purge;
  CREATE TABLE "HR"."COMM" 
    (	"BNO" NUMBER NOT NULL ENABLE, 
 	"CID" VARCHAR2(100 BYTE) NOT NULL ENABLE, 
